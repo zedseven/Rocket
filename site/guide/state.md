@@ -178,8 +178,8 @@ use the following dependencies:
 ```
 [dependencies]
 rocket = "0.3.5"
-diesel = { version = "1.0.0-rc1", features = ["sqlite"] }
-r2d2-diesel = "1.0.0-rc1"
+diesel = { version = "1.0", features = ["sqlite"] }
+r2d2-diesel = "1.0"
 r2d2 = "0.8"
 ```
 
