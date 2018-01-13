@@ -142,7 +142,7 @@ globally, add `#![allow(unmanaged_state)]` to your crate attributes.
 
 You can find a complete example using the `HitCount` structure in the [state
 example on
-GitHub](https://github.com/SergioBenitez/Rocket/tree/v0.3.5/examples/state) and
+GitHub](https://github.com/SergioBenitez/Rocket/tree/v0.3.6/examples/state) and
 learn more about the [`manage`
 method](https://api.rocket.rs/rocket/struct.Rocket.html#method.manage) and
 [`State` type](https://api.rocket.rs/rocket/struct.State.html) in the API docs.
@@ -177,7 +177,7 @@ use the following dependencies:
 
 ```
 [dependencies]
-rocket = "0.3.5"
+rocket = "0.3.6"
 diesel = { version = "1.0", features = ["sqlite"] }
 r2d2-diesel = "1.0"
 r2d2 = "0.8"
