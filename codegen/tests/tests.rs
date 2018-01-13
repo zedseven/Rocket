@@ -8,9 +8,17 @@ fn run_mode(mode: &'static str) {
 
     config.mode = cfg_mode;
     config.src_base = PathBuf::from(format!("tests/{}", mode));
+
+    #[cfg(debug_assertions)]
     let flags = [
         "-L crate=../target/debug/",
         "-L dependency=../target/debug/deps/",
+    ].join(" ");
+
+    #[cfg(not(debug_assertions))]
+    let flags = [
+        "-L crate=../target/release/",
+        "-L dependency=../target/release/deps/",
     ].join(" ");
 
     config.target_rustcflags = Some(flags);
