@@ -26,6 +26,7 @@ macro_rules! known_media_types {
         OTF (is_otf): "OTF", "application", "font-sfnt",
         WOFF (is_woff): "WOFF", "application", "font-woff",
         WOFF2 (is_woff2): "WOFF2", "font", "woff2",
+        WASM (is_wasm): "WASM", "application", "wasm",
         JsonApi (is_json_api): "JSON API", "application", "vnd.api+json"
     })
 }
@@ -54,6 +55,7 @@ macro_rules! known_extensions {
         "ttf" => TTF,
         "otf" => OTF,
         "woff" => WOFF,
+        "wasm" => WASM,
         "woff2" => WOFF2
     })
 }
