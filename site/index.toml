@@ -4,8 +4,8 @@
 
 [release]
 url = "https://crates.io/crates/rocket"
-version = "0.3.6"
-date = "Jan 12, 2018"
+version = "0.3.7"
+date = "Apr 03, 2018"
 
 [[top_features]]
 title = "Type Safe"
