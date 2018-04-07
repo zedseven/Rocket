@@ -8,12 +8,11 @@ use syntax::ext::base::{DummyResult, ExtCtxt, MacResult, MacEager};
 use syntax::parse::token::Token;
 use syntax::ptr::P;
 
-#[inline]
 pub fn prefix_paths(prefix: &str, paths: &mut Vec<Path>) {
     for p in paths {
         let last = p.segments.len() - 1;
         let last_seg = &mut p.segments[last];
-        last_seg.identifier = last_seg.identifier.prepend(prefix);
+        last_seg.ident = last_seg.ident.prepend(prefix);
     }
 }
 

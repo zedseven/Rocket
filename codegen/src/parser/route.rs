@@ -170,12 +170,12 @@ pub fn param_to_ident(ecx: &ExtCtxt, s: Spanned<&str>) -> Option<Spanned<Ident>>
 
 fn parse_method(ecx: &ExtCtxt, meta_item: &NestedMetaItem) -> Spanned<Method> {
     if let Some(word) = meta_item.word() {
-        if let Ok(method) = Method::from_str(&word.name().as_str()) {
+        if let Ok(method) = Method::from_str(&word.ident.name.as_str()) {
             if is_valid_method(method) {
                 return span(method, word.span());
             }
         } else {
-            let msg = format!("'{}' is not a valid HTTP method.", word.name());
+            let msg = format!("'{}' is not a valid HTTP method.", word.ident);
             ecx.span_err(word.span(), &msg);
         }
     }
