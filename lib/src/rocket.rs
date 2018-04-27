@@ -672,6 +672,9 @@ impl Rocket {
                 Err(e) => return LaunchError::from(e)
             }
 
+            // Freeze managed state for synchronization-free accesses later.
+            self.state.freeze();
+
             // Run the launch fairings.
             self.fairings.handle_launch(&self);
 
