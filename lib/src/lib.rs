@@ -2,6 +2,7 @@
 #![feature(const_fn)]
 #![feature(plugin)]
 #![feature(try_trait)]
+#![feature(never_type)]
 
 #![plugin(pear_codegen)]
 
