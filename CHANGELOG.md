@@ -1,3 +1,13 @@
+# Version 0.3.11 (May 19, 2018)
+
+## Core
+
+  * Core was updated for `2018-05-18` nightly.
+
+## Infrastructure
+
+  * Fixed injection of dependencies for codegen compile-fail tests.
+
 # Version 0.3.10 (May 05, 2018)
 
 ## Core

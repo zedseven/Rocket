@@ -53,8 +53,8 @@ project by ensuring your `Cargo.toml` contains the following:
 
 ```
 [dependencies]
-rocket = "0.3.10"
-rocket_codegen = "0.3.10"
+rocket = "0.3.11"
+rocket_codegen = "0.3.11"
 ```
 
 Modify `src/main.rs` so that it contains the code for the Rocket `Hello, world!`
