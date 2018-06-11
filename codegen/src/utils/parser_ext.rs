@@ -1,8 +1,7 @@
 use syntax::parse::parser::{PathStyle, Parser};
-use syntax::parse::PResult;
+use syntax::parse::{SeqSep, PResult};
 use syntax::ast::Path;
 use syntax::parse::token::Token::{Eof, Comma};
-use syntax::parse::common::SeqSep;
 
 pub trait ParserExt<'a> {
     fn parse_paths(&mut self) -> PResult<'a, Vec<Path>>;
