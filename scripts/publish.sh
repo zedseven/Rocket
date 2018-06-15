@@ -15,9 +15,12 @@ if ! [ -z "$(git status --porcelain)" ]; then
 fi
 
 # Ensure everything passes before trying to publish.
-echo ":::: Running test suite..."
+echo ":::: Running test suite [debug]..."
 cargo clean
 bash "${SCRIPT_DIR}/test.sh"
+
+echo ":::: Running test suite [release]..."
+cargo clean
 bash "${SCRIPT_DIR}/test.sh" --release
 
 # Temporarily remove the dependency on codegen from core so crates.io verifies.
