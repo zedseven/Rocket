@@ -1,3 +1,10 @@
+# Version 0.3.14 (Jun 22, 2018)
+
+## Codegen
+
+  * Codegen was updated for `2018-06-22` nightly.
+  * Minimum required `rustc` is `1.28.0-nightly 2018-06-22`.
+
 # Version 0.3.13 (Jun 16, 2018)
 
 ## Codegen
