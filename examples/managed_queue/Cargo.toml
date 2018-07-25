@@ -4,6 +4,6 @@ version = "0.0.0"
 workspace = "../.."
 
 [dependencies]
-crossbeam = "*"
+crossbeam = "0.4"
 rocket = { path = "../../lib" }
 rocket_codegen = { path = "../../codegen" }

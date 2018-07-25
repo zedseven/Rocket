@@ -3,7 +3,7 @@ use std::borrow::Cow;
 
 use rocket::request::FromParam;
 use rocket::http::RawStr;
-use rand::{self, Rng};
+use rand::{self, RngCore};
 
 /// Table to retrieve base62 values from.
 const BASE62: &'static [u8] = b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -20,7 +20,7 @@ impl<'a> PasteID<'a> {
         let mut id = String::with_capacity(size);
         let mut rng = rand::thread_rng();
         for _ in 0..size {
-            id.push(BASE62[rng.gen::<usize>() % 62] as char);
+            id.push(BASE62[(rng.next_u32() % 62) as usize] as char);
         }
 
         PasteID(Cow::Owned(id))
