@@ -13,7 +13,7 @@ diesel = { version = "<= 1.2", features = ["sqlite", "r2d2"] }
 dotenv = "0.10"
 
 [dev-dependencies]
-parking_lot = {version = "0.4", features = ["nightly"]}
+parking_lot = {version = "0.6", features = ["nightly"]}
 rand = "0.5"
 
 [dependencies.rocket_contrib]
