@@ -246,7 +246,7 @@ dependency in your `Cargo.toml` file:
 
 ```
 [dependencies]
-rocket = { version = "0.3.15", features = ["tls"] }
+rocket = { version = "0.3.16", features = ["tls"] }
 ```
 
 TLS is configured through the `tls` configuration parameter. The value of `tls`
