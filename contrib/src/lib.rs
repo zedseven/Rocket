@@ -1,5 +1,3 @@
-#![feature(use_extern_macros)]
-
 // TODO: Version URLs.
 #![doc(html_root_url = "https://api.rocket.rs")]
 
