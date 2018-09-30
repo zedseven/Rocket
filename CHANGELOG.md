@@ -1,3 +1,9 @@
+# Version 0.3.17 (Sep 29, 2018)
+
+## Codegen
+
+  * Fixed an issue that prevented macros from expanding properly to routes.
+
 # Version 0.3.16 (Aug 24, 2018)
 
 ## Codegen

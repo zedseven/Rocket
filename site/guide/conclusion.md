@@ -22,7 +22,7 @@ guide.
 
 The best way to learn Rocket is to _build something_. It should be fun and easy,
 and there's always someone to help. Alternatively, you can read through the
-[Rocket examples](https://github.com/SergioBenitez/Rocket/tree/v0.3.16/examples)
+[Rocket examples](https://github.com/SergioBenitez/Rocket/tree/v0.3.17/examples)
 or the [Rocket source
-code](https://github.com/SergioBenitez/Rocket/tree/v0.3.16/lib/src). Whatever you
+code](https://github.com/SergioBenitez/Rocket/tree/v0.3.17/lib/src). Whatever you
 decide to do next, we hope you have a blast!
