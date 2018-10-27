@@ -23,6 +23,8 @@ function relative() {
   fi
 }
 
+ROCKET_VERSION="0.3.17"
+
 ROOT_DIR=$(relative "") || exit $?
 EXAMPLES_DIR=$(relative "examples") || exit $?
 LIB_DIR=$(relative "lib") || exit $?
