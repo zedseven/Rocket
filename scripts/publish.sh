@@ -2,7 +2,7 @@
 set -e
 
 #
-# Publishes the current versions of core, contrib, and codegen to crates.io.
+# Publishes the current versions of all Rocket crates to crates.io.
 #
 
 # Brings in: ROOT_DIR, EXAMPLES_DIR, LIB_DIR, CODEGEN_DIR, CONTRIB_DIR, DOC_DIR
@@ -14,17 +14,25 @@ if ! [ -z "$(git status --porcelain)" ]; then
   exit 1
 fi
 
+function strip_dev_dependencies() {
+  perl -i.bak -p0e 's/\[dev-dependencies\][^\[]*//smg' "${1}/Cargo.toml"
+}
+
+function restore_dev_dependencies() {
+  mv "${1}/Cargo.toml.bak" "${1}/Cargo.toml"
+}
+
 # Ensure everything passes before trying to publish.
-echo ":::: Running test suite [debug]..."
+echo ":::: Running test suite..."
 cargo clean
 bash "${SCRIPT_DIR}/test.sh"
+bash "${SCRIPT_DIR}/test.sh --release"
 
-echo ":::: Running test suite [release]..."
-cargo clean
-bash "${SCRIPT_DIR}/test.sh" --release
-
-# Temporarily remove the dependency on codegen from core so crates.io verifies.
-sed -i.bak 's/rocket_codegen.*//' "${LIB_DIR}/Cargo.toml"
+# Temporarily remove dev-dependencies so crates.io verifies.
+echo ":::: Stripping [dev-dependencies]..."
+for dir in "${LIB_DIR}" "${CODEGEN_DIR}" "${CONTRIB_DIR}"; do
+  strip_dev_dependencies "${dir}"
+done
 
 # Publish all the things.
 for dir in "${LIB_DIR}" "${CODEGEN_DIR}" "${CONTRIB_DIR}"; do
@@ -35,5 +43,8 @@ for dir in "${LIB_DIR}" "${CODEGEN_DIR}" "${CONTRIB_DIR}"; do
   popd
 done
 
-# Restore the original core Cargo.toml.
-mv "${LIB_DIR}/Cargo.toml.bak" "${LIB_DIR}/Cargo.toml"
+# Restore dev-dependencies.
+echo ":::: Restoring [dev-dependencies]..."
+for dir in "${LIB_DIR}" "${CODEGEN_DIR}" "${CONTRIB_DIR}"; do
+  restore_dev_dependencies "${dir}"
+done
