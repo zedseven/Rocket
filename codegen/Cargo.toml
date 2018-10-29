@@ -19,7 +19,7 @@ rocket = { version = "0.3.17", path = "../lib/" }
 log = "0.3"
 
 [dev-dependencies]
-compiletest_rs = "0.3.5"
+compiletest_rs = { version = "0.3", features = ["stable"] }
 
 [build-dependencies]
 yansi = "0.4"
