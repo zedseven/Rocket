@@ -24,6 +24,8 @@ function relative() {
 }
 
 ROCKET_VERSION="0.3.17"
+ROCKET_MAJOR_VERSION="0.3"
+CURRENT_RELEASE=false
 
 ROOT_DIR=$(relative "") || exit $?
 EXAMPLES_DIR=$(relative "examples") || exit $?
