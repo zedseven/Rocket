@@ -6,7 +6,7 @@
 [![Matrix: #rocket:mozilla.org](https://img.shields.io/badge/style-%23rocket:mozilla.org-blue.svg?style=flat&label=[m])](https://chat.mozilla.org/#/room/#rocket:mozilla.org)
 [![IRC: #rocket on chat.freenode.net](https://img.shields.io/badge/style-%23rocket-blue.svg?style=flat&label=freenode)](https://kiwiirc.com/client/chat.freenode.net/#rocket)
 
-Rocket is web framework for Rust (nightly) with a focus on ease-of-use,
+Rocket is a web framework for Rust (nightly) with a focus on ease-of-use,
 expressibility, and speed. Here's an example of a complete Rocket application:
 
 ```rust
