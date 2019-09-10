@@ -1,5 +1,8 @@
 // normalize-stderr-test: "<(.*) as (.*)>" -> "$1 as $$TRAIT"
 // normalize-stderr-test: "and \d+ others" -> "and $$N others"
+// normalize-stderr-test: "::: [^\.]*" -> "::: $$FILE"
+
+#![feature(proc_macro_hygiene, decl_macro)]
 
 #[macro_use] extern crate rocket;
 
@@ -31,5 +34,9 @@ struct Thing4 {
     then: String,
     //~^ ERROR Header
 }
+
+#[get("/")]
+fn foo() -> usize { 0 }
+//~^ ERROR Responder
 
 fn main() {  }

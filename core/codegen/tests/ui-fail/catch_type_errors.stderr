@@ -1,20 +1,18 @@
 error[E0277]: the trait bound `usize: rocket::response::Responder<'_>` is not satisfied
- --> $DIR/catch_type_errors.rs:5:1
+ --> $DIR/catch_type_errors.rs:6:30
   |
-5 | #[catch(404)]
-  | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
+6 | fn f1(_request: &Request) -> usize {
+  |                              ^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
   |
   = note: required by `rocket::response::Responder::respond_to`
-  = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `bool: rocket::response::Responder<'_>` is not satisfied
-  --> $DIR/catch_type_errors.rs:11:1
+  --> $DIR/catch_type_errors.rs:12:30
    |
-11 | #[catch(404)]
-   | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `bool`
+12 | fn f2(_request: &Request) -> bool {
+   |                              ^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `bool`
    |
    = note: required by `rocket::response::Responder::respond_to`
-   = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0308]: mismatched types
   --> $DIR/catch_type_errors.rs:18:7
@@ -28,13 +26,12 @@ error[E0308]: mismatched types
                  found fn item `fn(bool) -> usize {f3}`
 
 error[E0277]: the trait bound `usize: rocket::response::Responder<'_>` is not satisfied
-  --> $DIR/catch_type_errors.rs:23:1
+  --> $DIR/catch_type_errors.rs:24:12
    |
-23 | #[catch(404)]
-   | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
+24 | fn f4() -> usize {
+   |            ^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
    |
    = note: required by `rocket::response::Responder::respond_to`
-   = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 4 previous errors
 
