@@ -1185,7 +1185,7 @@ impl<'r> fmt::Debug for Response<'r> {
         }
 
         match self.body {
-            Some(ref body) => writeln!(f, "{:?}", body),
+            Some(ref body) => body.fmt(f),
             None => writeln!(f, "Empty Body")
         }
     }
