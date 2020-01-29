@@ -23,10 +23,16 @@ function relative() {
   fi
 }
 
-# Full and major version of Rocket
+# Versioning information. These are toggled as versions change.
 ROCKET_VERSION="0.4.2"
-ROCKET_MAJOR_VERSION="0.4"
 CURRENT_RELEASE=true
+PRE_RELEASE=false
+
+# A generated codename for this version. Use the git branch for pre-releases.
+case $PRE_RELEASE in
+  true) VERSION_CODENAME="$(git branch --show-current)" ;;
+  false) VERSION_CODENAME="$(echo "${ROCKET_VERSION}" | cut -d'.' -f1-2)" ;;
+esac
 
 # Root of workspace-like directories.
 PROJECT_ROOT=$(relative "") || exit $?
@@ -54,6 +60,10 @@ ALL_PROJECT_DIRS=(
 )
 
 if [ "${1}" = "-p" ]; then
+  echo "ROCKET_VERSION: ${ROCKET_VERSION}"
+  echo "CURRENT_RELEASE: ${CURRENT_RELEASE}"
+  echo "PRE_RELEASE: ${PRE_RELEASE}"
+  echo "VERSION_CODENAME: ${VERSION_CODENAME}"
   echo "SCRIPT_DIR: ${SCRIPT_DIR}"
   echo "PROJECT_ROOT: ${PROJECT_ROOT}"
   echo "CORE_ROOT: ${CORE_ROOT}"
