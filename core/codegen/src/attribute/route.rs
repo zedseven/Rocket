@@ -329,6 +329,7 @@ fn generate_internal_uri_macro(route: &Route) -> TokenStream2 {
     let route_uri = route.attribute.path.origin.0.to_string();
 
     quote! {
+        #[doc(hidden)]
         pub macro #generated_macro_name($($token:tt)*) {{
             extern crate std;
             extern crate rocket;
