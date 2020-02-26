@@ -97,7 +97,7 @@
 //! [testing chapter of the guide]: https://rocket.rs/v0.4/guide/testing/#testing
 
 #[allow(unused_imports)] #[macro_use] extern crate rocket_codegen;
-#[doc(hidden)] pub use rocket_codegen::*;
+pub use rocket_codegen::*;
 
 extern crate rocket_http;
 #[macro_use] extern crate log;
