@@ -36,6 +36,7 @@ the wrapped `Responder`. As an example, the [`Accepted`] type sets the status to
 `202 - Accepted`. It can be used as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -53,6 +54,7 @@ Content-Type of `&'static str` to JSON, you can use the [`content::Json`] type
 as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 use rocket::response::content;
@@ -90,6 +92,7 @@ returning a [`Status`] directly. For instance, to forward to the catcher for
 **406: Not Acceptable**, you would write:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -124,6 +127,7 @@ responder, headers, or sets a custom status or content-type, `Responder` can be
 automatically derived:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -175,6 +179,7 @@ to `text/plain`. To get a taste for what such a `Responder` implementation looks
 like, here's the implementation for `String`:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -202,6 +207,7 @@ Because of these implementations, you can directly return an `&str` or `String`
 type from a handler:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 #[get("/string")]
@@ -223,6 +229,7 @@ known until process-time whether content exists. For example, because of
 found and a `404` when a file is not found in just 4, idiomatic lines:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -248,6 +255,7 @@ file server, for instance, we might wish to provide more feedback to the user
 when a file isn't found. We might do this as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -301,17 +309,18 @@ this easy. The `Stream` type can be created from any `Read` type. For example,
 to stream from a local Unix stream, we might write:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
 # #[cfg(unix)]
 # mod test {
 use std::os::unix::net::UnixStream;
-use rocket::response::{Stream, Debug};
+use rocket::response::Stream;
 
 #[get("/stream")]
-fn stream() -> Result<Stream<UnixStream>, Debug<std::io::Error>> {
-    Ok(UnixStream::connect("/path/to/my/socket").map(Stream::from)?)
+fn stream() -> Result<Stream<UnixStream>, std::io::Error> {
+    UnixStream::connect("/path/to/my/socket").map(Stream::from)
 }
 # }
 ```
@@ -329,6 +338,7 @@ As an example, to respond with the JSON value of a `Task` structure, we might
 write:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # #[macro_use] extern crate rocket_contrib;
 # fn main() {}
@@ -363,6 +373,7 @@ Rocket includes built-in templating support that works largely through a
 for instance, you might return a value of type `Template` as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # #[macro_use] extern crate rocket_contrib;
 # fn main() {}
@@ -390,7 +401,7 @@ fairings. To attach the template fairing, simply call
 `.attach(Template::fairing())` on an instance of `Rocket` as follows:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use rocket_contrib::templates::Template;
@@ -451,6 +462,7 @@ methods such as [`Redirect::to()`].
 For example, given the following route:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -461,7 +473,7 @@ fn person(name: String, age: Option<u8>) { /* .. */ }
 URIs to `person` can be created as follows:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # #[get("/person/<name>?<age>")]
@@ -528,7 +540,7 @@ in the query part of a URI, derive using [`UriDisplayQuery`].
 As an example, consider the following form structure and route:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -550,7 +562,7 @@ automatically generated, allowing for URIs to `add_user` to be generated using
 `uri!`:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use rocket::http::RawStr;
@@ -624,7 +636,7 @@ Conversions _nest_. For instance, a value of type `T` can be supplied when a
 value of type `Option<Form<T>>` is expected:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use rocket::http::RawStr;

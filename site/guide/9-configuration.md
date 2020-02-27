@@ -189,7 +189,7 @@ The following code will:
   3. Retrieve the parameter in an `assets` route via the `State` guard.
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 use std::path::{Path, PathBuf};
@@ -258,7 +258,7 @@ In addition to using environment variables or a config file, Rocket can also be
 configured using the [`rocket::custom()`] method and [`ConfigBuilder`]:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 use rocket::config::{Config, Environment};

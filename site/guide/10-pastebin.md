@@ -79,6 +79,7 @@ of the form `GET /`. We declare the route and its handler by adding the `index`
 function below to `src/main.rs`:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 
 #[get("/")]
@@ -109,7 +110,7 @@ Remember that routes first need to be mounted before Rocket dispatches requests
 to them. To mount the `index` route, modify the main function so that it reads:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # #[get("/")] fn index() { }
 
@@ -233,14 +234,14 @@ you should attempt to write the route yourself. Here's a hint: a possible route
 and handler signature look like this:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
 use rocket::Data;
-use rocket::response::Debug;
 
 #[post("/", data = "<paste>")]
-fn upload(paste: Data) -> Result<String, Debug<std::io::Error>> {
+fn upload(paste: Data) -> Result<String, std::io::Error> {
     # unimplemented!()
     /* .. */
 }
@@ -257,6 +258,7 @@ Your code should:
 Here's our version (in `src/main.rs`):
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -270,10 +272,9 @@ Here's our version (in `src/main.rs`):
 use std::path::Path;
 
 use rocket::Data;
-use rocket::response::Debug;
 
 #[post("/", data = "<paste>")]
-fn upload(paste: Data) -> Result<String, Debug<std::io::Error>> {
+fn upload(paste: Data) -> Result<String, std::io::Error> {
     let id = PasteId::new(3);
     let filename = format!("upload/{id}", id = id);
     let url = format!("{host}/{id}\n", host = "http://localhost:8000", id = id);
@@ -287,7 +288,7 @@ fn upload(paste: Data) -> Result<String, Debug<std::io::Error>> {
 Ensure that the route is mounted at the root path:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # #[get("/")] fn index() {}
@@ -335,6 +336,7 @@ as a **404** error, which is exactly what we want to return when the requested
 paste doesn't exist.
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 
 use std::fs::File;
@@ -350,7 +352,7 @@ fn retrieve(id: &RawStr) -> Option<File> {
 Make sure that the route is mounted at the root path:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # #[get("/")] fn index() {}
@@ -421,6 +423,7 @@ Rocket will then ensure that `<id>` represents a valid `PasteId` before calling
 the `retrieve` route, preventing attacks on the `retrieve` route:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use std::fs::File;

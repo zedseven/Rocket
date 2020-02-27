@@ -5,6 +5,7 @@ about a request in order for the route's handler to be called. You've already
 seen an example of this in action:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -39,6 +40,7 @@ against. For example, the following attribute will match against `POST` requests
 to the root path:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -75,6 +77,7 @@ names in a route's path. For example, if we want to say _Hello!_ to anything,
 not just the world, we can declare a route like so:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -99,6 +102,7 @@ the full list of provided implementations, see the [`FromParam` API docs].
 Here's a more complete route to illustrate varied usage:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -145,6 +149,7 @@ As an example, the following route matches against all paths that begin with
 `/page/`:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -160,6 +165,7 @@ The path after `/page/` will be available in the `path` parameter. The
 this, a safe and secure static file server can be implemented in 4 lines:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -190,6 +196,7 @@ Let's take a closer look at the route attribute and signature pair from a
 previous example:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -209,7 +216,7 @@ be manually set with the `rank` attribute. To illustrate, consider the following
 routes:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use rocket::http::RawStr;
@@ -291,7 +298,7 @@ Query segments can be declared static or dynamic in much the same way as path
 segments:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -333,6 +340,7 @@ parameter is missing in a request, `None` will be provided as the value.  A
 route using `Option<T>` looks as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -371,6 +379,7 @@ these types allow you to use a structure with named fields to automatically
 validate query/form parameters:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -391,6 +400,7 @@ sets `id` to `100` and `user` to `User { name: "sandal", account: 400 }`. To
 catch forms that fail to validate, use a type of `Option` or `Result`:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -426,7 +436,7 @@ For instance, the following dummy handler makes use of three request guards,
 named in the route attribute.
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -455,7 +465,7 @@ headers, you might create an `ApiKey` type that implements `FromRequest` and
 then use it as a request guard:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 # type ApiKey = rocket::http::Method;
@@ -537,7 +547,7 @@ following three routes, each leading to an administrative control panel at
 `/admin`:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -582,6 +592,7 @@ and remove cookies. Because `Cookies` is a request guard, an argument of its
 type can simply be added to a handler:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 use rocket::http::Cookies;
@@ -618,7 +629,7 @@ methods are suffixed with `_private`. These methods are: [`get_private`],
 [`add_private`], and [`remove_private`]. An example of their usage is below:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -627,7 +638,7 @@ use rocket::response::{Flash, Redirect};
 
 /// Retrieve the user's ID, if any.
 #[get("/user_id")]
-fn user_id(cookies: Cookies) -> Option<String> {
+fn user_id(mut cookies: Cookies) -> Option<String> {
     cookies.get_private("user_id")
         .map(|cookie| format!("User ID: {}", cookie.value()))
 }
@@ -698,6 +709,7 @@ due to the offending handler. A common error is to have a handler that uses a
 `Cookies`, as so:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 # use rocket::http::Cookies;
@@ -713,6 +725,7 @@ guard will retrieve an instance of `Cookies` when one already exists for
 guards:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 # use rocket::http::Cookies;
@@ -727,6 +740,7 @@ When using request guards that modify cookies on-demand, such as
 `Cookies` instance before accessing the `FlashMessage`.
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -763,6 +777,7 @@ When a route indicates a payload-supporting method (`PUT`, `POST`, `DELETE`, and
 As an example, consider the following route:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -789,6 +804,7 @@ route.
 As an example, consider the following route:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 # type User = ();
@@ -813,7 +829,7 @@ an argument in the handler. The argument's type must implement the [`FromData`]
 trait. It looks like this, where `T` is assumed to implement `FromData`:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # type T = rocket::data::Data;
@@ -835,6 +851,7 @@ checkbox, and `description`, a text field. You can easily handle the form
 request in Rocket as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -862,6 +879,7 @@ returned. As before, a forward or failure can be caught by using the `Option`
 and `Result` types:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -897,6 +915,7 @@ is also required to implement `FromForm`. For instance, we can simply replace
 `Form` with `LenientForm` above to get lenient parsing:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -929,6 +948,7 @@ Since `type` is a reserved keyword in Rust, it cannot be used as the name of a
 field. To get around this, you can use field renaming as follows:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -951,6 +971,7 @@ a field in a form structure, and implement `FromFormValue` so that it only
 validates integers over that age:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -981,6 +1002,7 @@ valid form for that structure. You can use `Option` or `Result` types for fields
 to catch parse failures:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -995,6 +1017,7 @@ struct Person {
 The `FromFormValue` trait can also be derived for enums with nullary fields:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -1021,6 +1044,7 @@ Handling JSON data is no harder: simply use the
 [`rocket_contrib`]:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # extern crate rocket_contrib;
 # fn main() {}
@@ -1052,15 +1076,15 @@ possible via the [`Data`](@api/rocket/data/struct.Data.html)
 type:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
 use rocket::Data;
-use rocket::response::Debug;
 
 #[post("/upload", format = "plain", data = "<data>")]
-fn upload(data: Data) -> Result<String, Debug<std::io::Error>> {
-    Ok(data.stream_to_file("/tmp/upload.txt").map(|n| n.to_string())?)
+fn upload(data: Data) -> Result<String, std::io::Error> {
+    data.stream_to_file("/tmp/upload.txt").map(|n| n.to_string())
 }
 ```
 
@@ -1104,6 +1128,7 @@ status code to catch. For instance, to declare a catcher for `404 Not Found`
 errors, you'd write:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -1117,6 +1142,7 @@ As with routes, the return type (here `T`) must implement `Responder`. A
 concrete implementation may look like:
 
 ```rust
+# #![feature(decl_macro)]
 # #[macro_use] extern crate rocket;
 # fn main() {}
 
@@ -1135,7 +1161,7 @@ mounting a route: call the [`register()`] method with a list of catchers via the
 looks like:
 
 ```rust
-# #![feature(proc_macro_hygiene)]
+# #![feature(proc_macro_hygiene, decl_macro)]
 # #[macro_use] extern crate rocket;
 
 # use rocket::Request;
