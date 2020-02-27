@@ -1,5 +1,6 @@
 // normalize-stderr-test: "<(.*) as (.*)>" -> "$1 as $$TRAIT"
 // normalize-stderr-test: "and \d+ others" -> "and $$N others"
+// normalize-stderr-test: "::: [^\.]*" -> "::: $$FILE"
 
 #![feature(proc_macro_hygiene, decl_macro)]
 

@@ -5,6 +5,7 @@ error[E0277]: the trait bound `usize: rocket::response::Responder<'_>` is not sa
   | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
   |
   = note: required by `rocket::response::Responder::respond_to`
+  = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `bool: rocket::response::Responder<'_>` is not satisfied
   --> $DIR/catch_type_errors.rs:11:1
@@ -13,6 +14,7 @@ error[E0277]: the trait bound `bool: rocket::response::Responder<'_>` is not sat
    | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `bool`
    |
    = note: required by `rocket::response::Responder::respond_to`
+   = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0308]: mismatched types
   --> $DIR/catch_type_errors.rs:18:7
@@ -32,6 +34,7 @@ error[E0277]: the trait bound `usize: rocket::response::Responder<'_>` is not sa
    | ^^^^^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
    |
    = note: required by `rocket::response::Responder::respond_to`
+   = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 4 previous errors
 
