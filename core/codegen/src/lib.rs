@@ -21,7 +21,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! rocket = "0.4.2"
+//! rocket = "0.4.3"
 //! ```
 //!
 //! And to import all macros, attributes, and derives via `#[macro_use]` in the
