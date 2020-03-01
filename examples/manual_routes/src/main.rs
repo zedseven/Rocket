@@ -8,7 +8,7 @@ use std::fs::File;
 
 use rocket::{Request, Handler, Route, Data, Catcher};
 use rocket::http::{Status, RawStr};
-use rocket::response::{self, Responder, status::Custom};
+use rocket::response::{self, Responder, status::Custom, Debug};
 use rocket::handler::Outcome;
 use rocket::outcome::IntoOutcome;
 use rocket::http::Method::*;
@@ -34,7 +34,7 @@ fn echo_url<'r>(req: &'r Request, _: Data) -> Outcome<'r> {
         .and_then(|res| res.ok())
         .into_outcome(Status::BadRequest)?;
 
-    Outcome::from(req, RawStr::from_str(param).url_decode())
+    Outcome::from(req, RawStr::from_str(param).url_decode().map_err(Debug))
 }
 
 fn upload<'r>(req: &'r Request, data: Data) -> Outcome<'r> {

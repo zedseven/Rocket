@@ -11,7 +11,7 @@ use std::fs::File;
 use std::path::Path;
 
 use rocket::Data;
-use rocket::response::content;
+use rocket::response::{content, Debug};
 
 use paste_id::PasteID;
 
@@ -19,7 +19,7 @@ const HOST: &str = "http://localhost:8000";
 const ID_LENGTH: usize = 3;
 
 #[post("/", data = "<paste>")]
-fn upload(paste: Data) -> io::Result<String> {
+fn upload(paste: Data) -> Result<String, Debug<io::Error>> {
     let id = PasteID::new(ID_LENGTH);
     let filename = format!("upload/{id}", id = id);
     let url = format!("{host}/{id}\n", host = HOST, id = id);
