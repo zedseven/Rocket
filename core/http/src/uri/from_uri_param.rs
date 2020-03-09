@@ -187,7 +187,7 @@ use uri::{self, UriPart, UriDisplay};
 /// assert_eq!(uri.query(), Some("name=Robert%20Mike&nickname=Bob"));
 /// ```
 ///
-/// [`uri!`]: ::rocket_codegen::uri
+/// [`uri!`]: ::rocket::uri
 /// [`UriDisplay`]: uri::UriDisplay
 /// [`FromUriParam::Target`]: uri::FromUriParam::Target
 /// [`Path`]: uri::Path

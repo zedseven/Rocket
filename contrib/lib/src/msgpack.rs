@@ -1,6 +1,6 @@
 //! Automatic MessagePack (de)serialization support.
 //!
-//! See the [`MsgPack`](msgpack::MessagePack) type for further details.
+//! See the [`MsgPack`] type for further details.
 //!
 //! # Enabling
 //!
