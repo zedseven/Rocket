@@ -27,6 +27,8 @@ mod static_tests {
             .mount("/dots", StaticFiles::new(&root, Options::DotFiles))
             .mount("/index", StaticFiles::new(&root, Options::Index))
             .mount("/both", StaticFiles::new(&root, Options::DotFiles | Options::Index))
+            .mount("/redir", StaticFiles::new(&root, Options::NormalizeDirs))
+            .mount("/redir_index", StaticFiles::new(&root, Options::NormalizeDirs | Options::Index))
     }
 
     static REGULAR_FILES: &[&str] = &[
@@ -118,5 +120,51 @@ mod static_tests {
                 assert!(routes.iter().all(|route| route.rank == rank), "{}", rank);
             }
         }
+    }
+
+    #[test]
+    fn test_redirection() {
+        let client = Client::new(rocket()).expect("valid rocket");
+
+        // Redirection only happens if enabled, and doesn't affect index behaviour.
+        let response = client.get("/no_index/inner").dispatch();
+        assert_eq!(response.status(), Status::NotFound);
+
+        let response = client.get("/index/inner").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+
+        let response = client.get("/redir/inner").dispatch();
+        assert_eq!(response.status(), Status::PermanentRedirect);
+        assert_eq!(response.headers().get("Location").next(), Some("/redir/inner/"));
+
+        let response = client.get("/redir/inner?foo=bar").dispatch();
+        assert_eq!(response.status(), Status::PermanentRedirect);
+        assert_eq!(response.headers().get("Location").next(), Some("/redir/inner/?foo=bar"));
+
+        let response = client.get("/redir_index/inner").dispatch();
+        assert_eq!(response.status(), Status::PermanentRedirect);
+        assert_eq!(response.headers().get("Location").next(), Some("/redir_index/inner/"));
+
+        // Paths with trailing slash are unaffected.
+        let response = client.get("/redir/inner/").dispatch();
+        assert_eq!(response.status(), Status::NotFound);
+
+        let response = client.get("/redir_index/inner/").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+
+        // Root of route is also redirected.
+        let response = client.get("/no_index").dispatch();
+        assert_eq!(response.status(), Status::NotFound);
+
+        let response = client.get("/index").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+
+        let response = client.get("/redir").dispatch();
+        assert_eq!(response.status(), Status::PermanentRedirect);
+        assert_eq!(response.headers().get("Location").next(), Some("/redir/"));
+
+        let response = client.get("/redir_index").dispatch();
+        assert_eq!(response.status(), Status::PermanentRedirect);
+        assert_eq!(response.headers().get("Location").next(), Some("/redir_index/"));
     }
 }

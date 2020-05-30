@@ -17,9 +17,9 @@
 use std::path::{PathBuf, Path};
 
 use rocket::{Request, Data, Route};
-use rocket::http::{Method, Status, uri::Segments};
+use rocket::http::{Method, Status, uri::Segments, ext::IntoOwned};
 use rocket::handler::{Handler, Outcome};
-use rocket::response::NamedFile;
+use rocket::response::{NamedFile, Redirect};
 use rocket::outcome::IntoOutcome;
 
 /// A bitset representing configurable options for the [`StaticFiles`] handler.
@@ -39,7 +39,8 @@ pub struct Options(u8);
 #[allow(non_upper_case_globals, non_snake_case)]
 impl Options {
     /// `Options` representing the empty set. No dotfiles or index pages are
-    /// rendered. This is different than the _default_, which enables `Index`.
+    /// rendered. This is different than the [`Options::default()`], which
+    /// enables `Index`.
     pub const None: Options = Options(0b0000);
 
     /// `Options` enabling responding to requests for a directory with the
@@ -53,6 +54,16 @@ impl Options {
     /// [`StaticFiles`] handler will respond to requests for files or
     /// directories beginning with `.`. This is _not_ enabled by default.
     pub const DotFiles: Options = Options(0b0010);
+
+    /// `Options` that normalizes directory requests by redirecting requests to
+    /// directory paths without a trailing slash to ones with a trailing slash.
+    ///
+    /// When enabled, the [`StaticFiles`] handler will respond to requests for a
+    /// directory without a trailing `/` with a permanent redirect (308) to the
+    /// same path with a trailing `/`. This ensures relative URLs within any
+    /// document served for that directory will be interpreted relative to that
+    /// directory, rather than its parent. This is _not_ enabled by default.
+    pub const NormalizeDirs: Options = Options(0b0100);
 
     /// Returns `true` if `self` is a superset of `other`. In other words,
     /// returns `true` if all of the options in `other` are also in `self`.
@@ -80,6 +91,7 @@ impl Options {
     }
 }
 
+/// The default set of options: `Options::Index`.
 impl Default for Options {
     fn default() -> Self {
         Options::Index
@@ -262,7 +274,10 @@ impl StaticFiles {
 impl Into<Vec<Route>> for StaticFiles {
     fn into(self) -> Vec<Route> {
         let non_index = Route::ranked(self.rank, Method::Get, "/<path..>", self.clone());
-        if self.options.contains(Options::Index) {
+        // `Index` requires routing the index for obvious reasons.
+        // `NormalizeDirs` requires routing the index so a `.mount("/foo")` with
+        // a request `/foo`, can be redirected to `/foo/`.
+        if self.options.contains(Options::Index) || self.options.contains(Options::NormalizeDirs) {
             let index = Route::ranked(self.rank, Method::Get, "/", self);
             vec![index, non_index]
         } else {
@@ -272,8 +287,16 @@ impl Into<Vec<Route>> for StaticFiles {
 }
 
 impl Handler for StaticFiles {
-    fn handle<'r>(&self, req: &'r Request, _: Data) -> Outcome<'r> {
-        fn handle_index<'r>(opt: Options, r: &'r Request, path: &Path) -> Outcome<'r> {
+    fn handle<'r>(&self, req: &'r Request<'_>, data: Data) -> Outcome<'r> {
+        fn handle_dir<'r>(opt: Options, r: &'r Request<'_>, d: Data, path: &Path) -> Outcome<'r> {
+            if opt.contains(Options::NormalizeDirs) && !r.uri().path().ends_with('/') {
+                let new_path = r.uri().map_path(|p| p.to_owned() + "/")
+                    .expect("adding a trailing slash to a known good path results in a valid path")
+                    .into_owned();
+
+                return Outcome::from_or_forward(r, d, Redirect::permanent(new_path));
+            }
+
             if !opt.contains(Options::Index) {
                 return Outcome::failure(Status::NotFound);
             }
@@ -286,7 +309,7 @@ impl Handler for StaticFiles {
         let current_route = req.route().expect("route while handling");
         let is_segments_route = current_route.uri.path().ends_with(">");
         if !is_segments_route {
-            return handle_index(self.options, req, &self.root);
+            return handle_dir(self.options, req, data, &self.root);
         }
 
         // Otherwise, we're handling segments. Get the segments as a `PathBuf`,
@@ -299,7 +322,7 @@ impl Handler for StaticFiles {
             .into_outcome(Status::NotFound)?;
 
         if path.is_dir() {
-            handle_index(self.options, req, &path)
+            handle_dir(self.options, req, data, &path)
         } else {
             Outcome::from(req, NamedFile::open(&path).ok())
         }
