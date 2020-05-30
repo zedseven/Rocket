@@ -29,6 +29,8 @@ use rocket::outcome::IntoOutcome;
 ///   * [`Options::None`] - Return only present, visible files.
 ///   * [`Options::DotFiles`] - In addition to visible files, return dotfiles.
 ///   * [`Options::Index`] - Render `index.html` pages for directory requests.
+///   * [`Options::NormalizeDirs`] - Redirect directories without a trailing
+///     slash to ones with a trailing slash.
 ///
 /// `Options` structures can be `or`d together to select two or more options.
 /// For instance, to request that both dot files and index pages be returned,
@@ -39,8 +41,8 @@ pub struct Options(u8);
 #[allow(non_upper_case_globals, non_snake_case)]
 impl Options {
     /// `Options` representing the empty set. No dotfiles or index pages are
-    /// rendered. This is different than the [`Options::default()`], which
-    /// enables `Index`.
+    /// rendered. This is different than [`Options::default()`](#impl-Default),
+    /// which enables `Index`.
     pub const None: Options = Options(0b0000);
 
     /// `Options` enabling responding to requests for a directory with the
