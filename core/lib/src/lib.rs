@@ -45,7 +45,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! rocket = "0.4.4"
+//! rocket = "0.4.5"
 //! ```
 //!
 //! Then, add the following to the top of your `main.rs` file:

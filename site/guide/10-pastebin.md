@@ -43,7 +43,7 @@ Then add the usual Rocket dependencies to the `Cargo.toml` file:
 
 ```toml
 [dependencies]
-rocket = "0.4.4"
+rocket = "0.4.5"
 ```
 
 And finally, create a skeleton Rocket application to work off of in
