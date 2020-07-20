@@ -1,10 +1,217 @@
-error[E0277]: the trait bound `u8: rocket::response::Responder<'_>` is not satisfied
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/uri_display.rs:299:43
+    |
+299 | impl<'a, P: UriPart> fmt::Display for &'a UriDisplay<P> {
+    |                                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn UriDisplay<P>`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/uri_display.rs:299:43
+    |
+299 | impl<'a, P: UriPart> fmt::Display for &'a UriDisplay<P> {
+    |                                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn UriDisplay<P>`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:12
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |            ^^^ help: use `..=` for an inclusive range
+  |
+  = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:12
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |            ^^^ help: use `..=` for an inclusive range
+  |
+  = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:24
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:24
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:36
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:36
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:48
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                                ^^^ help: use `..=` for an inclusive range
+
+warning: 6 warnings emitted
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:48
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                                ^^^ help: use `..=` for an inclusive range
+
+warning: 6 warnings emitted
+
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:563:27
+    |
+563 |     body: Option<Body<Box<io::Read + 'r>>>,
+    |                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn io::Read + 'r`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:892:48
+    |
+892 |     pub fn body(&mut self) -> Option<Body<&mut io::Read>> {
+    |                                                ^^^^^^^^ help: use `dyn`: `dyn io::Read`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:969:52
+    |
+969 |     pub fn take_body(&mut self) -> Option<Body<Box<io::Read + 'r>>> {
+    |                                                    ^^^^^^^^^^^^^ help: use `dyn`: `dyn io::Read + 'r`
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:12
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |            ^^^ help: use `..=` for an inclusive range
+   |
+   = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:24
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:36
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/data.rs:18:63
+   |
+18 |     self::HttpReader<&'a mut hyper::buffer::BufReader<&'b mut NetworkStream>>;
+   |                                                               ^^^^^^^^^^^^^ help: use `dyn`: `dyn NetworkStream`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/data.rs:108:41
+    |
+108 |         fn concrete_stream(stream: &mut NetworkStream) -> Option<NetStream> {
+    |                                         ^^^^^^^^^^^^^ help: use `dyn`: `dyn NetworkStream`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:155:36
+    |
+155 |     fn clone_handler(&self) -> Box<Handler>;
+    |                                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:160:36
+    |
+160 |     fn clone_handler(&self) -> Box<Handler> {
+    |                                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:165:20
+    |
+165 | impl Clone for Box<Handler> {
+    |                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:167:28
+    |
+167 |     fn clone(&self) -> Box<Handler> {
+    |                            ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+ --> $DIR/fairings.rs:8:27
+  |
+8 |     all_fairings: Vec<Box<Fairing>>,
+  |                           ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/fairings.rs:22:43
+   |
+22 |     pub fn attach(&mut self, fairing: Box<Fairing>, mut rocket: Rocket) -> Rocket {
+   |                                           ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/fairings.rs:35:36
+   |
+35 |     fn add(&mut self, fairing: Box<Fairing>) {
+   |                                    ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/error.rs:30:17
+   |
+30 |     Unknown(Box<::std::error::Error + Send + Sync>)
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: use `dyn`: `dyn ::std::error::Error + Send + Sync`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/route.rs:22:22
+   |
+22 |     pub handler: Box<Handler>,
+   |                      ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: 18 warnings emitted
+
+error[E0277]: the trait bound `u8: Responder<'_>` is not satisfied
   --> $DIR/responder-types.rs:11:5
    |
 11 |     thing: u8,
-   |     ^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `u8`
+   |     ^^^^^^^^^ the trait `Responder<'_>` is not implemented for `u8`
    |
-   = note: required by `rocket::response::Responder::respond_to`
+   = note: required by `respond_to`
 
 error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<u8>` is not satisfied
   --> $DIR/responder-types.rs:18:5
@@ -13,20 +220,20 @@ error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<u8>`
    |     ^^^^^^^^^ the trait `std::convert::From<u8>` is not implemented for `rocket::http::Header<'_>`
    |
    = help: the following implementations were found:
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-           and $N others
-   = note: required because of the requirements on the impl of `std::convert::Into<rocket::http::Header<'_>>` for `u8`
+             <rocket::http::Header<'static> as std::convert::From<&'a Cookie<'c>>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptCharset>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptEncoding>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptLanguage>>
+           and 43 others
+   = note: required because of the requirements on the impl of `Into<rocket::http::Header<'_>>` for `u8`
 
-error[E0277]: the trait bound `u8: rocket::response::Responder<'_>` is not satisfied
+error[E0277]: the trait bound `u8: Responder<'_>` is not satisfied
   --> $DIR/responder-types.rs:24:5
    |
 24 |     thing: u8,
-   |     ^^^^^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `u8`
+   |     ^^^^^^^^^ the trait `Responder<'_>` is not implemented for `u8`
    |
-   = note: required by `rocket::response::Responder::respond_to`
+   = note: required by `respond_to`
 
 error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<u8>` is not satisfied
   --> $DIR/responder-types.rs:26:5
@@ -35,12 +242,12 @@ error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<u8>`
    |     ^^^^^^^^^ the trait `std::convert::From<u8>` is not implemented for `rocket::http::Header<'_>`
    |
    = help: the following implementations were found:
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-           and $N others
-   = note: required because of the requirements on the impl of `std::convert::Into<rocket::http::Header<'_>>` for `u8`
+             <rocket::http::Header<'static> as std::convert::From<&'a Cookie<'c>>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptCharset>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptEncoding>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptLanguage>>
+           and 43 others
+   = note: required because of the requirements on the impl of `Into<rocket::http::Header<'_>>` for `u8`
 
 error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<std::string::String>` is not satisfied
   --> $DIR/responder-types.rs:34:5
@@ -49,24 +256,20 @@ error[E0277]: the trait bound `rocket::http::Header<'_>: std::convert::From<std:
    |     ^^^^^^^^^^^^ the trait `std::convert::From<std::string::String>` is not implemented for `rocket::http::Header<'_>`
    |
    = help: the following implementations were found:
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-             rocket::http::Header<'static> as $TRAIT
-           and $N others
-   = note: required because of the requirements on the impl of `std::convert::Into<rocket::http::Header<'_>>` for `std::string::String`
+             <rocket::http::Header<'static> as std::convert::From<&'a Cookie<'c>>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptCharset>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptEncoding>>
+             <rocket::http::Header<'static> as std::convert::From<AcceptLanguage>>
+           and 43 others
+   = note: required because of the requirements on the impl of `Into<rocket::http::Header<'_>>` for `std::string::String`
 
-error[E0277]: the trait bound `usize: rocket::response::Responder<'_>` is not satisfied
+error[E0277]: the trait bound `usize: Responder<'_>` is not satisfied
    --> $DIR/responder-types.rs:39:13
     |
 39  | fn foo() -> usize { 0 }
-    |             ^^^^^ the trait `rocket::response::Responder<'_>` is not implemented for `usize`
-    | 
-   ::: $FILE.rs:202:20
+    |             ^^^^^ the trait `Responder<'_>` is not implemented for `usize`
     |
-202 |     pub fn from<T: Responder<'r>>(req: &Request, responder: T) -> Outcome<'r> {
-    |                    ------------- required by this bound in `rocket::handler::<impl rocket::Outcome<rocket::Response<'r>, rocket::http::Status, rocket::Data>>::from`
-
-error: aborting due to 6 previous errors
-
-For more information about this error, try `rustc --explain E0277`.
+   ::: $WORKSPACE/core/lib/src/handler.rs
+    |
+    |     pub fn from<T: Responder<'r>>(req: &Request, responder: T) -> Outcome<'r> {
+    |                    ------------- required by this bound in `handler::<impl rocket::Outcome<rocket::Response<'r>, rocket::http::Status, rocket::Data>>::from`

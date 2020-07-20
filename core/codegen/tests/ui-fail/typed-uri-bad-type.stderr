@@ -1,145 +1,348 @@
-error[E0277]: the trait bound `usize: rocket::http::uri::FromUriParam<rocket::http::uri::Path, &str>` is not satisfied
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/uri_display.rs:299:43
+    |
+299 | impl<'a, P: UriPart> fmt::Display for &'a UriDisplay<P> {
+    |                                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn UriDisplay<P>`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/uri_display.rs:299:43
+    |
+299 | impl<'a, P: UriPart> fmt::Display for &'a UriDisplay<P> {
+    |                                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn UriDisplay<P>`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:12
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |            ^^^ help: use `..=` for an inclusive range
+  |
+  = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:12
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |            ^^^ help: use `..=` for an inclusive range
+  |
+  = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:24
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:24
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:36
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:36
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:48
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                                ^^^ help: use `..=` for an inclusive range
+
+warning: 6 warnings emitted
+
+warning: `...` range patterns are deprecated
+ --> $DIR/checkers.rs:9:48
+  |
+9 |         '0'...'9' | 'A'...'Z' | '^'...'~' | '#'...'\''
+  |                                                ^^^ help: use `..=` for an inclusive range
+
+warning: 6 warnings emitted
+
+warning: the feature `specialization` is incomplete and may not be safe to use and/or cause compiler crashes
+ --> $DIR/lib.rs:1:12
+  |
+1 | #![feature(specialization)]
+  |            ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(incomplete_features)]` on by default
+  = note: see issue #31844 <https://github.com/rust-lang/rust/issues/31844> for more information
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:563:27
+    |
+563 |     body: Option<Body<Box<io::Read + 'r>>>,
+    |                           ^^^^^^^^^^^^^ help: use `dyn`: `dyn io::Read + 'r`
+    |
+    = note: `#[warn(bare_trait_objects)]` on by default
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:892:48
+    |
+892 |     pub fn body(&mut self) -> Option<Body<&mut io::Read>> {
+    |                                                ^^^^^^^^ help: use `dyn`: `dyn io::Read`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/response.rs:969:52
+    |
+969 |     pub fn take_body(&mut self) -> Option<Body<Box<io::Read + 'r>>> {
+    |                                                    ^^^^^^^^^^^^^ help: use `dyn`: `dyn io::Read + 'r`
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:12
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |            ^^^ help: use `..=` for an inclusive range
+   |
+   = note: `#[warn(ellipsis_inclusive_range_patterns)]` on by default
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:24
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |                        ^^^ help: use `..=` for an inclusive range
+
+warning: `...` range patterns are deprecated
+  --> $DIR/toml_ext.rs:27:36
+   |
+27 |         '0'...'9' | 'A'...'Z' | 'a'...'z' | '_' | '-' => true,
+   |                                    ^^^ help: use `..=` for an inclusive range
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/data.rs:18:63
+   |
+18 |     self::HttpReader<&'a mut hyper::buffer::BufReader<&'b mut NetworkStream>>;
+   |                                                               ^^^^^^^^^^^^^ help: use `dyn`: `dyn NetworkStream`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/data.rs:108:41
+    |
+108 |         fn concrete_stream(stream: &mut NetworkStream) -> Option<NetStream> {
+    |                                         ^^^^^^^^^^^^^ help: use `dyn`: `dyn NetworkStream`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:155:36
+    |
+155 |     fn clone_handler(&self) -> Box<Handler>;
+    |                                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:160:36
+    |
+160 |     fn clone_handler(&self) -> Box<Handler> {
+    |                                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:165:20
+    |
+165 | impl Clone for Box<Handler> {
+    |                    ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+   --> $DIR/handler.rs:167:28
+    |
+167 |     fn clone(&self) -> Box<Handler> {
+    |                            ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: trait objects without an explicit `dyn` are deprecated
+ --> $DIR/fairings.rs:8:27
+  |
+8 |     all_fairings: Vec<Box<Fairing>>,
+  |                           ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/fairings.rs:22:43
+   |
+22 |     pub fn attach(&mut self, fairing: Box<Fairing>, mut rocket: Rocket) -> Rocket {
+   |                                           ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/fairings.rs:35:36
+   |
+35 |     fn add(&mut self, fairing: Box<Fairing>) {
+   |                                    ^^^^^^^ help: use `dyn`: `dyn Fairing`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/error.rs:30:17
+   |
+30 |     Unknown(Box<::std::error::Error + Send + Sync>)
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: use `dyn`: `dyn ::std::error::Error + Send + Sync`
+
+warning: trait objects without an explicit `dyn` are deprecated
+  --> $DIR/route.rs:22:22
+   |
+22 |     pub handler: Box<Handler>,
+   |                      ^^^^^^^ help: use `dyn`: `dyn Handler`
+
+warning: 18 warnings emitted
+
+error[E0277]: the trait bound `usize: FromUriParam<rocket::http::uri::Path, &str>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:50:23
    |
 50 |     uri!(simple: id = "hi");
-   |                       ^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, &str>` is not implemented for `usize`
+   |                       ^^^^ the trait `FromUriParam<rocket::http::uri::Path, &str>` is not implemented for `usize`
    |
    = help: the following implementations were found:
-             usize as $TRAIT
-             usize as $TRAIT
-             usize as $TRAIT
-   = note: required by `rocket::http::uri::FromUriParam::from_uri_param`
+             <usize as FromUriParam<P, &'x mut usize>>
+             <usize as FromUriParam<P, &'x usize>>
+             <usize as FromUriParam<P, usize>>
+   = note: required by `from_uri_param`
 
-error[E0277]: the trait bound `usize: rocket::http::uri::FromUriParam<rocket::http::uri::Path, &str>` is not satisfied
+error[E0277]: the trait bound `usize: FromUriParam<rocket::http::uri::Path, &str>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:53:18
    |
 53 |     uri!(simple: "hello");
-   |                  ^^^^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, &str>` is not implemented for `usize`
+   |                  ^^^^^^^ the trait `FromUriParam<rocket::http::uri::Path, &str>` is not implemented for `usize`
    |
    = help: the following implementations were found:
-             usize as $TRAIT
-             usize as $TRAIT
-             usize as $TRAIT
-   = note: required by `rocket::http::uri::FromUriParam::from_uri_param`
+             <usize as FromUriParam<P, &'x mut usize>>
+             <usize as FromUriParam<P, &'x usize>>
+             <usize as FromUriParam<P, usize>>
+   = note: required by `from_uri_param`
 
-error[E0277]: the trait bound `usize: rocket::http::uri::FromUriParam<rocket::http::uri::Path, i64>` is not satisfied
+error[E0277]: the trait bound `usize: FromUriParam<rocket::http::uri::Path, i64>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:56:23
    |
 56 |     uri!(simple: id = 239239i64);
-   |                       ^^^^^^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, i64>` is not implemented for `usize`
+   |                       ^^^^^^^^^ the trait `FromUriParam<rocket::http::uri::Path, i64>` is not implemented for `usize`
    |
    = help: the following implementations were found:
-             usize as $TRAIT
-             usize as $TRAIT
-             usize as $TRAIT
-   = note: required by `rocket::http::uri::FromUriParam::from_uri_param`
+             <usize as FromUriParam<P, &'x mut usize>>
+             <usize as FromUriParam<P, &'x usize>>
+             <usize as FromUriParam<P, usize>>
+   = note: required by `from_uri_param`
 
-error[E0277]: the trait bound `S: rocket::http::uri::FromUriParam<rocket::http::uri::Path, _>` is not satisfied
+error[E0277]: the trait bound `S: FromUriParam<rocket::http::uri::Path, _>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:59:31
    |
 59 |     uri!(not_uri_display: 10, S);
-   |                               ^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, _>` is not implemented for `S`
+   |                               ^ the trait `FromUriParam<rocket::http::uri::Path, _>` is not implemented for `S`
 
-error[E0277]: the trait bound `i32: rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::option::Option<{integer}>>` is not satisfied
+error[E0277]: the trait bound `i32: FromUriParam<rocket::http::uri::Path, Option<{integer}>>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:65:26
    |
 65 |     uri!(optionals: id = Some(10), name = Ok("bob".into()));
-   |                          ^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::option::Option<{integer}>>` is not implemented for `i32`
+   |                          ^^^^ the trait `FromUriParam<rocket::http::uri::Path, Option<{integer}>>` is not implemented for `i32`
    |
    = help: the following implementations were found:
-             i32 as $TRAIT
-             i32 as $TRAIT
-             i32 as $TRAIT
-   = note: required because of the requirements on the impl of `rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::option::Option<{integer}>>` for `std::option::Option<i32>`
+             <i32 as FromUriParam<P, &'x i32>>
+             <i32 as FromUriParam<P, &'x mut i32>>
+             <i32 as FromUriParam<P, i32>>
+   = note: required because of the requirements on the impl of `FromUriParam<rocket::http::uri::Path, Option<{integer}>>` for `Option<i32>`
 
-error[E0277]: the trait bound `std::string::String: rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` is not satisfied
+error[E0277]: the trait bound `std::string::String: FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:65:43
    |
 65 |     uri!(optionals: id = Some(10), name = Ok("bob".into()));
-   |                                           ^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` is not implemented for `std::string::String`
+   |                                           ^^ the trait `FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` is not implemented for `std::string::String`
    |
    = help: the following implementations were found:
-             std::string::String as $TRAIT
-             std::string::String as $TRAIT
-             std::string::String as $TRAIT
-             std::string::String as $TRAIT
-           and $N others
-   = note: required because of the requirements on the impl of `rocket::http::uri::FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` for `std::result::Result<std::string::String, &rocket::http::RawStr>`
+             <std::string::String as FromUriParam<P, &'a str>>
+             <std::string::String as FromUriParam<P, &'x &'a str>>
+             <std::string::String as FromUriParam<P, &'x mut &'a str>>
+             <std::string::String as FromUriParam<P, &'x mut std::string::String>>
+           and 2 others
+   = note: required because of the requirements on the impl of `FromUriParam<rocket::http::uri::Path, std::result::Result<_, _>>` for `std::result::Result<std::string::String, &RawStr>`
 
-error[E0277]: the trait bound `isize: rocket::http::uri::FromUriParam<rocket::http::uri::Query, &str>` is not satisfied
+error[E0277]: the trait bound `isize: FromUriParam<rocket::http::uri::Query, &str>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:69:20
    |
 69 |     uri!(simple_q: "hi");
-   |                    ^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Query, &str>` is not implemented for `isize`
+   |                    ^^^^ the trait `FromUriParam<rocket::http::uri::Query, &str>` is not implemented for `isize`
    |
    = help: the following implementations were found:
-             isize as $TRAIT
-             isize as $TRAIT
-             isize as $TRAIT
-   = note: required by `rocket::http::uri::FromUriParam::from_uri_param`
+             <isize as FromUriParam<P, &'x isize>>
+             <isize as FromUriParam<P, &'x mut isize>>
+             <isize as FromUriParam<P, isize>>
+   = note: required by `from_uri_param`
 
-error[E0277]: the trait bound `isize: rocket::http::uri::FromUriParam<rocket::http::uri::Query, &str>` is not satisfied
+error[E0277]: the trait bound `isize: FromUriParam<rocket::http::uri::Query, &str>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:72:25
    |
 72 |     uri!(simple_q: id = "hi");
-   |                         ^^^^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Query, &str>` is not implemented for `isize`
+   |                         ^^^^ the trait `FromUriParam<rocket::http::uri::Query, &str>` is not implemented for `isize`
    |
    = help: the following implementations were found:
-             isize as $TRAIT
-             isize as $TRAIT
-             isize as $TRAIT
-   = note: required by `rocket::http::uri::FromUriParam::from_uri_param`
+             <isize as FromUriParam<P, &'x isize>>
+             <isize as FromUriParam<P, &'x mut isize>>
+             <isize as FromUriParam<P, isize>>
+   = note: required by `from_uri_param`
 
-error[E0277]: the trait bound `S: rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not satisfied
+error[E0277]: the trait bound `S: FromUriParam<rocket::http::uri::Query, _>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:75:24
    |
 75 |     uri!(other_q: 100, S);
-   |                        ^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
+   |                        ^ the trait `FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
 
-error[E0277]: the trait bound `S: rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not satisfied
+error[E0277]: the trait bound `S: FromUriParam<rocket::http::uri::Query, _>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:78:26
    |
 78 |     uri!(other_q: rest = S, id = 100);
-   |                          ^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
+   |                          ^ the trait `FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
 
-error[E0277]: the trait bound `S: rocket::http::uri::Ignorable<rocket::http::uri::Query>` is not satisfied
+error[E0277]: the trait bound `S: Ignorable<rocket::http::uri::Query>` is not satisfied
    --> $DIR/typed-uri-bad-type.rs:42:29
     |
 42  | fn other_q(id: usize, rest: S) {  }
-    |                             ^ the trait `rocket::http::uri::Ignorable<rocket::http::uri::Query>` is not implemented for `S`
+    |                             ^ the trait `Ignorable<rocket::http::uri::Query>` is not implemented for `S`
 ...
 81  |     uri!(other_q: rest = _, id = 100);
     |     ---------------------------------- in this macro invocation
-    | 
-   ::: $FILE.rs:469:40
     |
-469 | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
-    |                                        ------------ required by this bound in `rocket::http::uri::assert_ignorable`
+   ::: $WORKSPACE/core/http/src/uri/uri_display.rs
+    |
+    | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
+    |                                        ------------ required by this bound in `assert_ignorable`
     |
     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0277]: the trait bound `usize: rocket::http::uri::Ignorable<rocket::http::uri::Query>` is not satisfied
+error[E0277]: the trait bound `usize: Ignorable<rocket::http::uri::Query>` is not satisfied
    --> $DIR/typed-uri-bad-type.rs:42:16
     |
 42  | fn other_q(id: usize, rest: S) {  }
-    |                ^^^^^ the trait `rocket::http::uri::Ignorable<rocket::http::uri::Query>` is not implemented for `usize`
+    |                ^^^^^ the trait `Ignorable<rocket::http::uri::Query>` is not implemented for `usize`
 ...
 83  |     uri!(other_q: rest = S, id = _);
     |     -------------------------------- in this macro invocation
-    | 
-   ::: $FILE.rs:469:40
     |
-469 | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
-    |                                        ------------ required by this bound in `rocket::http::uri::assert_ignorable`
+   ::: $WORKSPACE/core/http/src/uri/uri_display.rs
+    |
+    | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
+    |                                        ------------ required by this bound in `assert_ignorable`
     |
     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0277]: the trait bound `S: rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not satisfied
+error[E0277]: the trait bound `S: FromUriParam<rocket::http::uri::Query, _>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:83:26
    |
 83 |     uri!(other_q: rest = S, id = _);
-   |                          ^ the trait `rocket::http::uri::FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
-
-error: aborting due to 13 previous errors
-
-For more information about this error, try `rustc --explain E0277`.
+   |                          ^ the trait `FromUriParam<rocket::http::uri::Query, _>` is not implemented for `S`
