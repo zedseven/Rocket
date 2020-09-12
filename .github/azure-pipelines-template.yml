@@ -64,6 +64,7 @@ jobs:
 
   # Sanity check version information.
   - script: |
+      rustup toolchain install $(rust_version)
       rustup default $(rust_version)
       rustc -Vv && cargo -V
     displayName: 'Rust/Cargo Version Information'
