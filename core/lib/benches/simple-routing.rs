@@ -1,4 +1,4 @@
-#![feature(proc_macro_hygiene, decl_macro)]
+#![feature(proc_macro_hygiene, decl_macro, test)]
 // #![feature(alloc_system)]
 // extern crate alloc_system;
 
