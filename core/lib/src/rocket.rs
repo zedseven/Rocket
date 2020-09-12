@@ -713,6 +713,10 @@ impl Rocket {
             let timeout = self.config.keep_alive.map(|s| Duration::from_secs(s as u64));
             server.keep_alive(timeout);
 
+            // Set sane timeouts.
+            server.set_read_timeout(Some(Duration::from_secs(10)));
+            server.set_write_timeout(Some(Duration::from_secs(10)));
+
             // Freeze managed state for synchronization-free accesses later.
             self.state.freeze();
 
