@@ -127,7 +127,7 @@ impl FromStr for Uuid {
 
     #[inline]
     fn from_str(s: &str) -> Result<Uuid, Self::Err> {
-        Ok(Uuid(try!(s.parse())))
+        s.parse().map(Uuid)
     }
 }
 

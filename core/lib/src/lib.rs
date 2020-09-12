@@ -1,3 +1,4 @@
+#![allow(incomplete_features)]
 #![feature(specialization)]
 #![feature(decl_macro)]
 #![feature(try_trait)]

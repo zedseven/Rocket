@@ -2,6 +2,7 @@
 
 use std::{io, fmt};
 use std::sync::atomic::{Ordering, AtomicBool};
+use std::error::Error;
 
 use yansi::Paint;
 
@@ -27,7 +28,7 @@ pub enum LaunchErrorKind {
     /// A launch fairing reported an error.
     FailedFairings(Vec<&'static str>),
     /// An otherwise uncategorized error occurred during launch.
-    Unknown(Box<::std::error::Error + Send + Sync>)
+    Unknown(Box<dyn Error + Send + Sync>)
 }
 
 /// An error that occurs during launch.

@@ -145,26 +145,26 @@ pub trait Handler: Cloneable + Send + Sync + 'static {
     fn handle<'r>(&self, request: &'r Request, data: Data) -> Outcome<'r>;
 }
 
-/// Unfortunate but necessary hack to be able to clone a `Box<Handler>`.
+/// Unfortunate but necessary hack to be able to clone a `Box<dyn Handler>`.
 ///
 /// This trait should _never_ (and cannot, due to coherence) be implemented by
 /// any type. Instead, implement `Clone`. All types that implement `Clone` and
 /// `Handler` automatically implement `Cloneable`.
 pub trait Cloneable {
     /// Clones `self`.
-    fn clone_handler(&self) -> Box<Handler>;
+    fn clone_handler(&self) -> Box<dyn Handler>;
 }
 
 impl<T: Handler + Clone> Cloneable for T {
     #[inline(always)]
-    fn clone_handler(&self) -> Box<Handler> {
+    fn clone_handler(&self) -> Box<dyn Handler> {
         Box::new(self.clone())
     }
 }
 
-impl Clone for Box<Handler> {
+impl Clone for Box<dyn Handler> {
     #[inline(always)]
-    fn clone(&self) -> Box<Handler> {
+    fn clone(&self) -> Box<dyn Handler> {
         self.clone_handler()
     }
 }

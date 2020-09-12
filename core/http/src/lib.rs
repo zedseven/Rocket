@@ -1,3 +1,4 @@
+#![allow(incomplete_features)]
 #![feature(specialization)]
 #![feature(proc_macro_hygiene)]
 #![feature(crate_visibility_modifier)]
