@@ -140,7 +140,7 @@ error[E0277]: the trait bound `Foo1: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -153,9 +153,9 @@ error[E0277]: the trait bound `Foo1: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo1`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo1`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo1: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -167,9 +167,9 @@ error[E0277]: the trait bound `Foo1: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo1`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo1`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo2: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -181,7 +181,7 @@ error[E0277]: the trait bound `Foo2: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -194,9 +194,9 @@ error[E0277]: the trait bound `Foo2: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo2`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo2`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo2: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -208,9 +208,9 @@ error[E0277]: the trait bound `Foo2: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo2`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo2`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo3: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -222,7 +222,7 @@ error[E0277]: the trait bound `Foo3: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -235,9 +235,9 @@ error[E0277]: the trait bound `Foo3: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo3`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo3`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo3: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -249,9 +249,9 @@ error[E0277]: the trait bound `Foo3: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo3`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo3`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo4: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -263,7 +263,7 @@ error[E0277]: the trait bound `Foo4: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -276,9 +276,9 @@ error[E0277]: the trait bound `Foo4: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo4`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo4`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo4: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -290,9 +290,9 @@ error[E0277]: the trait bound `Foo4: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo4`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo4`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo5: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -304,7 +304,7 @@ error[E0277]: the trait bound `Foo5: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -317,9 +317,9 @@ error[E0277]: the trait bound `Foo5: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo5`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo5`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo5: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -331,9 +331,9 @@ error[E0277]: the trait bound `Foo5: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo5`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo5`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo6: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -345,7 +345,7 @@ error[E0277]: the trait bound `Foo6: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -358,9 +358,9 @@ error[E0277]: the trait bound `Foo6: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&Foo6`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r Foo6`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo6: UriDisplay<rocket::http::uri::Query>` is not satisfied
@@ -372,9 +372,9 @@ error[E0277]: the trait bound `Foo6: UriDisplay<rocket::http::uri::Query>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&mut Foo6`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Query>` for `&'__r mut Foo6`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo7: UriDisplay<rocket::http::uri::Path>` is not satisfied
@@ -386,7 +386,7 @@ error[E0277]: the trait bound `Foo7: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -399,9 +399,9 @@ error[E0277]: the trait bound `Foo7: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&Foo7`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&'__r Foo7`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo8: UriDisplay<rocket::http::uri::Path>` is not satisfied
@@ -413,7 +413,7 @@ error[E0277]: the trait bound `Foo8: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -426,9 +426,9 @@ error[E0277]: the trait bound `Foo8: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&Foo8`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&'__r Foo8`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo9: UriDisplay<rocket::http::uri::Path>` is not satisfied
@@ -440,7 +440,7 @@ error[E0277]: the trait bound `Foo9: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -453,9 +453,9 @@ error[E0277]: the trait bound `Foo9: UriDisplay<rocket::http::uri::Path>` is not
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&Foo9`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&'__r Foo9`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `Foo10: UriDisplay<rocket::http::uri::Path>` is not satisfied
@@ -467,7 +467,7 @@ error[E0277]: the trait bound `Foo10: UriDisplay<rocket::http::uri::Path>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
@@ -480,7 +480,7 @@ error[E0277]: the trait bound `Foo10: UriDisplay<rocket::http::uri::Path>` is no
    ::: $WORKSPACE/core/http/src/uri/from_uri_param.rs
     |
     |     type Target: UriDisplay<P>;
-    |                  ------------- required by this bound in `FromUriParam`
+    |                  ------------- required by this bound in `rocket::http::uri::FromUriParam::Target`
     |
-    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&Foo10`
+    = note: required because of the requirements on the impl of `UriDisplay<rocket::http::uri::Path>` for `&'__r Foo10`
     = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)

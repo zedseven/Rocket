@@ -1,79 +1,60 @@
 #![feature(proc_macro_hygiene, decl_macro)]
-#[macro_use]
-extern crate rocket;
 
-use rocket::http::ContentType;
-use rocket::response::Content;
-use rocket::response::Responder;
-use std::io::BufReader;
-use std::io::Read;
-use std::thread::sleep;
+#[macro_use] extern crate rocket;
+extern crate rocket_contrib;
+
+use std::io::{self, BufReader, Read, Write};
 use std::time::Duration;
 
-#[get("/")]
-fn index<'r>() -> impl Responder<'r> {
-    Content(
-        ContentType::HTML,
-        r##"
-<body>
-<h1>Hi!</h1>
+use rocket::http::ContentType;
+use rocket::response::{Content, Stream};
+use rocket_contrib::serve::StaticFiles;
 
-<div id="spong">nothing yet</div>
+const BUF_SIZE: usize = 4096;
 
-</body>
-<script src="script.js"></script>
-"##,
-    )
+struct Counter {
+    n: usize,
+    state: State,
 }
 
-#[get("/script.js")]
-fn script<'r>() -> impl Responder<'r> {
-    Content(
-        ContentType::JavaScript,
-        r##"
-status_node = document.getElementById('spong');
-status_node.innerHTML = 'js-done'
+enum State { Flush, Sleep, Write }
 
-es = new EventSource("updates");
-es.onmessage = function(event) {
-  status_node.innerHTML = event.data;
-}
-"##,
-    )
-}
+impl Read for Counter {
+    fn read(&mut self, mut buf: &mut [u8]) -> io::Result<usize> {
+        // ping/pong between sleep and flush, and implicit sleep -> write
+        match self.state {
+            State::Flush => {
+                self.state = State::Sleep;
+                Err(io::ErrorKind::WouldBlock)?;
+            },
+            State::Sleep => std::thread::sleep(Duration::from_millis(500)),
+            State::Write => { /* fall through to `State::Write` */ },
+        }
 
-const BUF_SIZE : usize = 4096;
+        self.n += 1;
+        self.state = State::Flush;
 
-type TestCounter = BufReader<TestCounterInner>;
-#[derive(Debug)]
-struct TestCounterInner {
-    next: usize,
-}
-impl Read for TestCounterInner {
-    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
-        sleep(Duration::from_millis(500));
-        let data = format!("data: {}\n\n", self.next);
-        self.next += 1;
-        // `BufReader` won't call us unless its buffer is empty, and
-        // then buf will be the whole of the buffer, ie of size
-        // BUF_SIZE (due to the `with_capacity` call).  So `data` is
-        // definitely going to fit.
-        buf[0..data.len()].copy_from_slice(data.as_bytes());
-        Ok(buf.len())
+        // `BufReader` won't call us unless its buffer is empty, and then buf
+        // will be the whole of the buffer, ie of size BUF_SIZE (due to the
+        // `with_capacity` call).  So `data` is definitely going to fit.
+        let data = format!("data: {}\n\n", self.n);
+        buf.write_all(data.as_bytes())?;
+        Ok(data.len())
     }
 }
 
+type CounterStream = Stream<BufReader<Counter>>;
+
 #[get("/updates")]
-fn updates<'x>() -> impl Responder<'x> {
-    let tc = TestCounterInner { next: 0 };
-    let tc = BufReader::with_capacity(BUF_SIZE, tc);
-    let ch = rocket::response::Stream::from(tc);
-    let ct = ContentType::parse_flexible("text/event-stream; charset=utf-8").unwrap();
-    Content(ct, ch)
+fn updates() -> Content<CounterStream> {
+    let reader = BufReader::with_capacity(BUF_SIZE, Counter { n: 0, state: State::Write });
+    let ct = ContentType::with_params("text", "event-stream", ("charset", "utf-8"));
+    Content(ct, Stream::from(reader))
 }
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![index, script, updates,])
+        .mount("/", routes![updates])
+        .mount("/", StaticFiles::from("static"))
         .launch();
 }

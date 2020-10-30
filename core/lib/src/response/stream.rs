@@ -32,27 +32,26 @@ impl<T: Read> Stream<T> {
     ///
     /// # Buffering and blocking
     ///
-    /// Normally, data will be buffered and sent only in complete
-    /// `chunk_size` chunks.
+    /// Normally, data will be buffered and sent only in complete `chunk_size`
+    /// chunks.
     ///
-    /// With the feature `sse` enabled, the `Read`er may signal that
-    /// data sent so far should be transmitted in a timely fashion
-    /// (e.g. it is responding to a Server-Side Events (JavaScript
-    /// `EventSource`) request.  To do this it should return an
-    /// [io::Error](std::io::Error) of kind `WouldBlock` (which should
-    /// not normally occur), after returning a collection of data.
-    /// This will cause a flush of data seen so far, rather than being
-    /// treated as an error.
+    /// With the feature `sse` enabled, the `Read`er may signal that data sent
+    /// so far should be transmitted in a timely fashion (e.g. it is responding
+    /// to a Server-Side Events (JavaScript `EventSource`) request. To do this
+    /// it should return an [io::Error](std::io::Error) of kind `WouldBlock`
+    /// (which should not normally occur), after returning a collection of data.
+    /// This will cause a flush of data seen so far, rather than being treated
+    /// as an error.
     ///
-    /// Note that long-running responses may easily exhaust Rocket's
-    /// thread pool, so consider increasing the number of threads.
-    /// If doing SSE, also note the 'maximum open connections' browser
-    /// limitation which is described in the
-    /// [EventSource documentation](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+    /// Note that long-running responses may easily exhaust Rocket's thread
+    /// pool, so consider increasing the number of threads. If doing SSE, also
+    /// note the 'maximum open connections' browser limitation which is
+    /// described in the [EventSource
+    /// documentation](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
     /// on the Mozilla Developer Network.
     ///
-    /// Without the `sse` feature, a `WouldBlock` error is treated
-    /// as an actual error.
+    /// Without the `sse` feature, a `WouldBlock` error is treated as an actual
+    /// error.
     pub fn chunked(reader: T, chunk_size: u64) -> Stream<T> {
         Stream(reader, chunk_size)
     }
