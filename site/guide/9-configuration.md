@@ -39,6 +39,8 @@ $ sudo ROCKET_ENV=staging cargo run
     => secret key: generated
     => limits: forms = 32KiB
     => keep-alive: 5s
+    => read timeout: 5s
+    => write timeout: 5s
     => tls: disabled
 🛰  Mounting '/':
     => GET / (hello)
@@ -66,6 +68,8 @@ address = "localhost"
 port = 8000
 workers = [number of cpus * 2]
 keep_alive = 5
+read_timeout = 5
+write_timeout = 5
 log = "normal"
 secret_key = [randomly generated at launch]
 limits = { forms = 32768 }
@@ -75,6 +79,8 @@ address = "0.0.0.0"
 port = 8000
 workers = [number of cpus * 2]
 keep_alive = 5
+read_timeout = 5
+write_timeout = 5
 log = "normal"
 secret_key = [randomly generated at launch]
 limits = { forms = 32768 }
@@ -84,6 +90,8 @@ address = "0.0.0.0"
 port = 8000
 workers = [number of cpus * 2]
 keep_alive = 5
+read_timeout = 5
+write_timeout = 5
 log = "critical"
 secret_key = [randomly generated at launch]
 limits = { forms = 32768 }

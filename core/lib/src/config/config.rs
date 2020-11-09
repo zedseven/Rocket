@@ -46,6 +46,12 @@ pub struct Config {
     pub workers: u16,
     /// Keep-alive timeout in seconds or None if disabled.
     pub keep_alive: Option<u32>,
+    /// Number of seconds to wait without _receiving_ data before closing a
+    /// connection; disabled when `None`.
+    pub read_timeout: Option<u32>,
+    /// Number of seconds to wait without _sending_ data before closing a
+    /// connection; disabled when `None`.
+    pub write_timeout: Option<u32>,
     /// How much information to log.
     pub log_level: LoggingLevel,
     /// The secret key.
@@ -229,6 +235,8 @@ impl Config {
                     port: 8000,
                     workers: default_workers,
                     keep_alive: Some(5),
+                    read_timeout: Some(5),
+                    write_timeout: Some(5),
                     log_level: LoggingLevel::Normal,
                     secret_key: key,
                     tls: None,
@@ -245,6 +253,8 @@ impl Config {
                     port: 8000,
                     workers: default_workers,
                     keep_alive: Some(5),
+                    read_timeout: Some(5),
+                    write_timeout: Some(5),
                     log_level: LoggingLevel::Normal,
                     secret_key: key,
                     tls: None,
@@ -261,6 +271,8 @@ impl Config {
                     port: 8000,
                     workers: default_workers,
                     keep_alive: Some(5),
+                    read_timeout: Some(5),
+                    write_timeout: Some(5),
                     log_level: LoggingLevel::Critical,
                     secret_key: key,
                     tls: None,
@@ -307,6 +319,8 @@ impl Config {
             port => (u16, set_port, ok),
             workers => (u16, set_workers, ok),
             keep_alive => (u32, set_keep_alive, ok),
+            read_timeout => (u32, set_read_timeout, ok),
+            write_timeout => (u32, set_write_timeout, ok),
             log => (log_level, set_log_level, ok),
             secret_key => (str, set_secret_key, id),
             tls => (tls_config, set_raw_tls, id),
@@ -419,6 +433,60 @@ impl Config {
             self.keep_alive = None;
         } else {
             self.keep_alive = Some(timeout);
+        }
+    }
+
+    /// Sets the read timeout to `timeout` seconds. If `timeout` is `0`, read
+    /// timeouts are disabled.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use rocket::config::Config;
+    ///
+    /// let mut config = Config::development();
+    ///
+    /// // Set read timeout to 10 seconds.
+    /// config.set_read_timeout(10);
+    /// assert_eq!(config.read_timeout, Some(10));
+    ///
+    /// // Disable read timeouts.
+    /// config.set_read_timeout(0);
+    /// assert_eq!(config.read_timeout, None);
+    /// ```
+    #[inline]
+    pub fn set_read_timeout(&mut self, timeout: u32) {
+        if timeout == 0 {
+            self.read_timeout = None;
+        } else {
+            self.read_timeout = Some(timeout);
+        }
+    }
+
+    /// Sets the write timeout to `timeout` seconds. If `timeout` is `0`, write
+    /// timeouts are disabled.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use rocket::config::Config;
+    ///
+    /// let mut config = Config::development();
+    ///
+    /// // Set write timeout to 10 seconds.
+    /// config.set_write_timeout(10);
+    /// assert_eq!(config.write_timeout, Some(10));
+    ///
+    /// // Disable write timeouts.
+    /// config.set_write_timeout(0);
+    /// assert_eq!(config.write_timeout, None);
+    /// ```
+    #[inline]
+    pub fn set_write_timeout(&mut self, timeout: u32) {
+        if timeout == 0 {
+            self.write_timeout = None;
+        } else {
+            self.write_timeout = Some(timeout);
         }
     }
 

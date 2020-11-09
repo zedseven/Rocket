@@ -31,18 +31,20 @@
 //! not used by Rocket itself but can be used by external libraries. The
 //! standard configuration parameters are:
 //!
-//! | name       | type           | description                                                 | examples                   |
-//! |------------|----------------|-------------------------------------------------------------|----------------------------|
-//! | address    | string         | ip address or host to listen on                             | `"localhost"`, `"1.2.3.4"` |
-//! | port       | integer        | port number to listen on                                    | `8000`, `80`               |
-//! | keep_alive | integer        | keep-alive timeout in seconds                               | `0` (disable), `10`        |
-//! | workers    | integer        | number of concurrent thread workers                         | `36`, `512`                |
-//! | log        | string         | max log level: `"off"`, `"normal"`, `"debug"`, `"critical"` | `"off"`, `"normal"`        |
-//! | secret_key | 256-bit base64 | secret key for private cookies                              | `"8Xui8SI..."` (44 chars)  |
-//! | tls        | table          | tls config table with two keys (`certs`, `key`)             | _see below_                |
-//! | tls.certs  | string         | path to certificate chain in PEM format                     | `"private/cert.pem"`       |
-//! | tls.key    | string         | path to private key for `tls.certs` in PEM format           | `"private/key.pem"`        |
-//! | limits     | table          | map from data type (string) to data limit (integer: bytes)  | `{ forms = 65536 }`        |
+//! | name          | type           | description                                                 | examples                   |
+//! |------------   |----------------|-------------------------------------------------------------|----------------------------|
+//! | address       | string         | ip address or host to listen on                             | `"localhost"`, `"1.2.3.4"` |
+//! | port          | integer        | port number to listen on                                    | `8000`, `80`               |
+//! | keep_alive    | integer        | keep-alive timeout in seconds                               | `0` (disable), `10`        |
+//! | read_timeout  | integer        | data read timeout in seconds                                | `0` (disable), `5`         |
+//! | write_timeout | integer        | data write timeout in seconds                               | `0` (disable), `5`         |
+//! | workers       | integer        | number of concurrent thread workers                         | `36`, `512`                |
+//! | log           | string         | max log level: `"off"`, `"normal"`, `"debug"`, `"critical"` | `"off"`, `"normal"`        |
+//! | secret_key    | 256-bit base64 | secret key for private cookies                              | `"8Xui8SI..."` (44 chars)  |
+//! | tls           | table          | tls config table with two keys (`certs`, `key`)             | _see below_                |
+//! | tls.certs     | string         | path to certificate chain in PEM format                     | `"private/cert.pem"`       |
+//! | tls.key       | string         | path to private key for `tls.certs` in PEM format           | `"private/key.pem"`        |
+//! | limits        | table          | map from data type (string) to data limit (integer: bytes)  | `{ forms = 65536 }`        |
 //!
 //! ### Rocket.toml
 //!
@@ -64,6 +66,8 @@
 //! port = 8000
 //! workers = [number_of_cpus * 2]
 //! keep_alive = 5
+//! read_timeout = 5
+//! write_timeout = 5
 //! log = "normal"
 //! secret_key = [randomly generated at launch]
 //! limits = { forms = 32768 }
@@ -73,6 +77,8 @@
 //! port = 8000
 //! workers = [number_of_cpus * 2]
 //! keep_alive = 5
+//! read_timeout = 5
+//! write_timeout = 5
 //! log = "normal"
 //! secret_key = [randomly generated at launch]
 //! limits = { forms = 32768 }
@@ -82,6 +88,8 @@
 //! port = 8000
 //! workers = [number_of_cpus * 2]
 //! keep_alive = 5
+//! read_timeout = 5
+//! write_timeout = 5
 //! log = "critical"
 //! secret_key = [randomly generated at launch]
 //! limits = { forms = 32768 }
@@ -579,6 +587,8 @@ mod test {
             workers = 21
             log = "critical"
             keep_alive = 0
+            read_timeout = 1
+            write_timeout = 0
             secret_key = "8Xui8SN4mI+7egV/9dlfYYLGQJeEx4+DwmSQLwDVXJg="
             template_dir = "mine"
             json = true
@@ -591,6 +601,8 @@ mod test {
             .workers(21)
             .log_level(LoggingLevel::Critical)
             .keep_alive(0)
+            .read_timeout(1)
+            .write_timeout(0)
             .secret_key("8Xui8SN4mI+7egV/9dlfYYLGQJeEx4+DwmSQLwDVXJg=")
             .extra("template_dir", "mine")
             .extra("json", true)
@@ -866,7 +878,7 @@ mod test {
     }
 
     #[test]
-    fn test_good_keep_alives() {
+    fn test_good_keep_alives_and_timeouts() {
         // Take the lock so changing the environment doesn't cause races.
         let _env_lock = ENV_LOCK.lock().unwrap();
         env::set_var(CONFIG_ENV, "stage");
@@ -898,10 +910,24 @@ mod test {
                       "#.to_string(), TEST_CONFIG_FILENAME), {
                           default_config(Staging).keep_alive(0)
                       });
+
+        check_config!(RocketConfig::parse(r#"
+                          [stage]
+                          read_timeout = 10
+                      "#.to_string(), TEST_CONFIG_FILENAME), {
+                          default_config(Staging).read_timeout(10)
+                      });
+
+        check_config!(RocketConfig::parse(r#"
+                          [stage]
+                          write_timeout = 4
+                      "#.to_string(), TEST_CONFIG_FILENAME), {
+                          default_config(Staging).write_timeout(4)
+                      });
     }
 
     #[test]
-    fn test_bad_keep_alives() {
+    fn test_bad_keep_alives_and_timeouts() {
         // Take the lock so changing the environment doesn't cause races.
         let _env_lock = ENV_LOCK.lock().unwrap();
         env::remove_var(CONFIG_ENV);
@@ -924,6 +950,16 @@ mod test {
         assert!(RocketConfig::parse(r#"
             [dev]
             keep_alive = 4294967296
+        "#.to_string(), TEST_CONFIG_FILENAME).is_err());
+
+        assert!(RocketConfig::parse(r#"
+            [dev]
+            read_timeout = true
+        "#.to_string(), TEST_CONFIG_FILENAME).is_err());
+
+        assert!(RocketConfig::parse(r#"
+            [dev]
+            write_timeout = None
         "#.to_string(), TEST_CONFIG_FILENAME).is_err());
     }
 

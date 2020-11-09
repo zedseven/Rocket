@@ -69,7 +69,7 @@ impl hyper::Handler for Rocket {
         };
 
         // Retrieve the data from the hyper body.
-        let data = match Data::from_hyp(h_body) {
+        let data = match Data::from_hyp(&req, h_body) {
             Ok(data) => data,
             Err(reason) => {
                 error_!("Bad data in request: {}", reason);
@@ -414,10 +414,18 @@ impl Rocket {
         launch_info_!("secret key: {}", Paint::default(&config.secret_key).bold());
         launch_info_!("limits: {}", Paint::default(&config.limits).bold());
 
-        match config.keep_alive {
-            Some(v) => launch_info_!("keep-alive: {}", Paint::default(format!("{}s", v)).bold()),
-            None => launch_info_!("keep-alive: {}", Paint::default("disabled").bold()),
+        fn log_timeout(name: &str, value: Option<u32>) {
+            let painted = match value {
+                Some(v) => Paint::default(format!("{}s", v)).bold(),
+                None => Paint::default("disabled".into()).bold()
+            };
+
+            launch_info_!("{}: {}", name, painted);
         }
+
+        log_timeout("keep-alive", config.keep_alive);
+        log_timeout("read timeout", config.read_timeout);
+        log_timeout("write timeout", config.write_timeout);
 
         let tls_configured = config.tls.is_some();
         if tls_configured && cfg!(feature = "tls") {
@@ -717,8 +725,11 @@ impl Rocket {
             server.keep_alive(timeout);
 
             // Set sane timeouts.
-            server.set_read_timeout(Some(Duration::from_secs(10)));
-            server.set_write_timeout(Some(Duration::from_secs(10)));
+            let read_timeout = self.config.read_timeout.map(|s| Duration::from_secs(s as u64));
+            server.set_read_timeout(read_timeout);
+
+            let write_timeout = self.config.write_timeout.map(|s| Duration::from_secs(s as u64));
+            server.set_write_timeout(write_timeout);
 
             // Freeze managed state for synchronization-free accesses later.
             self.state.freeze();

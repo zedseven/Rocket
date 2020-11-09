@@ -87,6 +87,8 @@ run`. You should see the following:
     => secret key: generated
     => limits: forms = 32KiB
     => keep-alive: 5s
+    => read timeout: 5s
+    => write timeout: 5s
     => tls: disabled
 🛰  Mounting '/':
     => GET / (index)

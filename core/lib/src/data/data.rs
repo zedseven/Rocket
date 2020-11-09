@@ -91,7 +91,10 @@ impl Data {
     }
 
     // FIXME: This is absolutely terrible (downcasting!), thanks to Hyper.
-    crate fn from_hyp(mut body: HyperBodyReader) -> Result<Data, &'static str> {
+    crate fn from_hyp(
+        req: &crate::Request<'_>,
+        mut body: HyperBodyReader
+    ) -> Result<Data, &'static str> {
         #[inline(always)]
         #[cfg(feature = "tls")]
         fn concrete_stream(stream: &mut dyn NetworkStream) -> Option<NetStream> {
@@ -117,7 +120,8 @@ impl Data {
         };
 
         // Set the read timeout to 5 seconds.
-        let _ = net_stream.set_read_timeout(Some(Duration::from_secs(5)));
+        let timeout = req.state.config.read_timeout.map(|s| Duration::from_secs(s as u64));
+        let _ = net_stream.set_read_timeout(timeout);
 
         // Steal the internal, undecoded data buffer from Hyper.
         let (mut hyper_buf, pos, cap) = body.get_mut().take_buf();
