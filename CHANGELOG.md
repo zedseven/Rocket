@@ -1,3 +1,26 @@
+# Version 0.4.6 (Nov 09, 2020)
+
+## Core
+
+  * [[`86bd7c`]] Added default and configurable read/write timeouts:
+    `read_timeout` and `write_timeout`.
+  * [[`c24a96`]] Added the `sse` feature, which [enables flushing] by returning
+    `io::ErrorKind::WouldBlock`.
+
+## Docs
+
+  * Fixed broken doc links in `contrib`.
+  * Fixed database library versions in `contrib` docs.
+
+## Internal
+
+  * Updated source code for Rust 2018.
+  * UI tests now use `trybuild` instead of `compiletest-rs`.
+
+[`86bd7c`]: https://github.com/SergioBenitez/Rocket/commit/86bd7c
+[`c24a96`]: https://github.com/SergioBenitez/Rocket/commit/c24a96
+[enables flushing]: https://api.rocket.rs/v0.4/rocket/response/struct.Stream.html#buffering-and-blocking
+
 # Version 0.4.5 (May 30, 2020)
 
 ## Core

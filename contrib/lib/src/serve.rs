@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies.rocket_contrib]
-//! version = "0.4.5"
+//! version = "0.4.6"
 //! default-features = false
 //! features = ["serve"]
 //! ```
