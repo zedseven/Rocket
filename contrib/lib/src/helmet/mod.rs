@@ -23,14 +23,14 @@
 //!
 //! # Supported Headers
 //!
-//! | HTTP Header                 | Description                            | Policy       | Default? |
-//! | --------------------------- | -------------------------------------- | ------------ | -------- |
-//! | [X-XSS-Protection]          | Prevents some reflected XSS attacks.   | [`XssFilter`]      | ✔        |
-//! | [X-Content-Type-Options]    | Prevents client sniffing of MIME type. | [`NoSniff`]  | ✔        |
-//! | [X-Frame-Options]           | Prevents [clickjacking].               | [`Frame`]    | ✔        |
-//! | [Strict-Transport-Security] | Enforces strict use of HTTPS.          | [`Hsts`]     | ?        |
-//! | [Expect-CT]                 | Enables certificate transparency.      | [`ExpectCt`] | ✗        |
-//! | [Referrer-Policy]           | Enables referrer policy.               | [`Referrer`] | ✗        |
+//! | HTTP Header                 | Description                            | Policy        | Default? |
+//! | --------------------------- | -------------------------------------- | ------------- | -------- |
+//! | [X-XSS-Protection]          | Prevents some reflected XSS attacks.   | [`XssFilter`] | ✔        |
+//! | [X-Content-Type-Options]    | Prevents client sniffing of MIME type. | [`NoSniff`]   | ✔        |
+//! | [X-Frame-Options]           | Prevents [clickjacking].               | [`Frame`]     | ✔        |
+//! | [Strict-Transport-Security] | Enforces strict use of HTTPS.          | [`Hsts`]      | ?        |
+//! | [Expect-CT]                 | Enables certificate transparency.      | [`ExpectCt`]  | ✗        |
+//! | [Referrer-Policy]           | Enables referrer policy.               | [`Referrer`]  | ✗        |
 //!
 //! <small>? If TLS is enabled when the application is launched, in a
 //! non-development environment (e.g., staging or production), HSTS is
@@ -45,12 +45,12 @@
 //! [Referrer-Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
 //! [clickjacking]: https://en.wikipedia.org/wiki/Clickjacking
 //!
-//! [`XssFilter`]: helmet::XssFilter
-//! [`NoSniff`]: helmet::NoSniff
-//! [`Frame`]: helmet::Frame
-//! [`Hsts`]: helmet::Hsts
-//! [`ExpectCt`]: helmet::ExpectCt
-//! [`Referrer`]: helmet::Referrer
+//! [`XssFilter`]: self::XssFilter
+//! [`NoSniff`]: self::NoSniff
+//! [`Frame`]: self::Frame
+//! [`Hsts`]: self::Hsts
+//! [`ExpectCt`]: self::ExpectCt
+//! [`Referrer`]: self::Referrer
 //!
 //! # Usage
 //!

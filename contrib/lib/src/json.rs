@@ -304,8 +304,9 @@ impl<'a> Responder<'a> for JsonValue {
 /// #[macro_use] extern crate rocket_contrib;
 /// ```
 ///
-/// The return type of a `json!` invocation is [`JsonValue`](json::JsonValue). A
-/// value created with this macro can be returned from a handler as follows:
+/// The return type of a `json!` invocation is
+/// [`JsonValue`](crate::json::JsonValue). A value created with this macro can
+/// be returned from a handler as follows:
 ///
 /// ```rust
 /// # #![feature(proc_macro_hygiene, decl_macro)]
