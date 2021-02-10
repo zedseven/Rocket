@@ -1,3 +1,13 @@
+# Version 0.4.7 (Feb 09, 2020)
+
+## Core
+
+  * [[#1534], [`2059a6`]] Fixed a low-severity, minimal impact soundness issue
+    in `uri::Formatter`.
+
+[#1534]: https://github.com/SergioBenitez/Rocket/issues/1534
+[`2059a6`]: https://github.com/SergioBenitez/Rocket/commit/2059a6
+
 # Version 0.4.6 (Nov 09, 2020)
 
 ## Core
