@@ -65,4 +65,4 @@ error[E0277]: the trait bound `usize: Responder<'_>` is not satisfied
    ::: $WORKSPACE/core/lib/src/handler.rs
     |
     |     pub fn from<T: Responder<'r>>(req: &Request, responder: T) -> Outcome<'r> {
-    |                    ------------- required by this bound in `handler::<impl rocket::Outcome<rocket::Response<'r>, rocket::http::Status, rocket::Data>>::from`
+    |                    ------------- required by this bound in `handler::<impl Outcome<rocket::Response<'r>, rocket::http::Status, rocket::Data>>::from`
