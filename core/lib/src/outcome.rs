@@ -603,11 +603,10 @@ impl<S, E, F> Outcome<S, E, F> {
     }
 }
 
-impl<Y, S, E: From<Y>, F> FromResidual<Result<!, Y>> for Outcome<S, E, F> {
-    fn from_residual(r: Result<!, Y>) -> Self {
-        #[allow(unreachable_code)]
+impl<Y, S, E: From<Y>, F> FromResidual<Result<std::convert::Infallible, Y>> for Outcome<S, E, F> {
+    fn from_residual(r: Result<std::convert::Infallible, Y>) -> Self {
         match r {
-            Ok(v) => Outcome::Success(v),
+            Ok(never) => match never {},
             Err(y) => Outcome::Failure(y.into()),
         }
     }
@@ -615,9 +614,8 @@ impl<Y, S, E: From<Y>, F> FromResidual<Result<!, Y>> for Outcome<S, E, F> {
 
 impl<S, X, E: From<X>, Y, F: From<Y>> FromResidual<Outcome<!, X, Y>> for Outcome<S, E, F> {
     fn from_residual(r: Outcome<!, X, Y>) -> Self {
-        #[allow(unreachable_code)]
         match r {
-            Outcome::Success(s) => Outcome::Success(s),
+            Outcome::Success(never) => match never {},
             Outcome::Failure(x) => Outcome::Failure(x.into()),
             Outcome::Forward(y) => Outcome::Forward(y.into()),
         }
@@ -652,5 +650,39 @@ impl<S, E, F> fmt::Display for Outcome<S, E, F> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let (color, string) = self.formatting();
         write!(f, "{}", Paint::default(string).fg(color))
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::Outcome::{self, *};
+
+    macro_rules! fake_try {
+        ($e:block) => {
+            (||{
+                std::ops::Try::from_output($e)
+            })()
+        }
+    }
+
+    #[test]
+    fn outcome_try_trait() {
+        let r: Outcome<u16, String, f64> = fake_try! {{ 3 }};
+        assert_eq!(r, Success(3));
+        let r: Outcome<u16, String, f64> = fake_try! {{ Success::<_, &'static str, f32>(3)? }};
+        assert_eq!(r, Success(3));
+        let r: Outcome<u16, String, f64> = fake_try! {{ Failure::<u64, _, f32>("oops")?; 7 }};
+        assert_eq!(r, Failure(String::from("oops")));
+        let r: Outcome<u16, String, f64> = fake_try! {{ Forward::<u64, &'static str, _>(1234.5_f32)?; 7 }};
+        assert_eq!(r, Forward(1234.5));
+    }
+
+    #[test]
+    fn can_use_question_mark_on_result_in_function_returning_outcome() {
+        fn demo() -> Outcome<i128, String, f32> {
+            Err("problem")?;
+            unreachable!()
+        }
+        assert_eq!(demo(), Failure(String::from("problem")));
     }
 }
