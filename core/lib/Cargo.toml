@@ -33,7 +33,7 @@ num_cpus = "1.0"
 state = "0.4.1"
 time = "0.1"
 memchr = "2" # TODO: Use pear instead.
-base64 = "0.12"
+base64 = "0.13"
 pear = "0.1"
 atty = "0.2"
 
