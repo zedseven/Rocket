@@ -32,7 +32,7 @@
 //!
 //! ```toml
 //! [dependencies.rocket_contrib]
-//! version = "0.4.8"
+//! version = "0.4.9"
 //! default-features = false
 //! features = ["diesel_sqlite_pool"]
 //! ```

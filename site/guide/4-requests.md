@@ -659,7 +659,7 @@ so that you depend on `rocket` as follows:
 
 ```toml
 [dependencies]
-rocket = { version = "0.4.8", default-features = false }
+rocket = { version = "0.4.9", default-features = false }
 ```
 
 [`ring`]: https://github.com/briansmith/ring
