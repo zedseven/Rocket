@@ -124,7 +124,7 @@ error[E0277]: the trait bound `S: Ignorable<rocket::http::uri::Query>` is not sa
     | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
     |                                        ------------ required by this bound in `assert_ignorable`
     |
-    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+    = note: this error originates in the macro `rocket_uri_macro_other_q` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `usize: Ignorable<rocket::http::uri::Query>` is not satisfied
    --> $DIR/typed-uri-bad-type.rs:42:16
@@ -140,7 +140,7 @@ error[E0277]: the trait bound `usize: Ignorable<rocket::http::uri::Query>` is no
     | pub fn assert_ignorable<P: UriPart, T: Ignorable<P>>() {  }
     |                                        ------------ required by this bound in `assert_ignorable`
     |
-    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+    = note: this error originates in the macro `rocket_uri_macro_other_q` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0277]: the trait bound `S: FromUriParam<rocket::http::uri::Query, _>` is not satisfied
   --> $DIR/typed-uri-bad-type.rs:83:26

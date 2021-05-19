@@ -517,7 +517,7 @@ mod tests {
 
     #[test]
     fn send_and_sync() {
-        fn assert<T: Send + Sync>() {};
+        fn assert<T: Send + Sync>() {}
         assert::<Origin>();
     }
 

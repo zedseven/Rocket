@@ -116,8 +116,8 @@ fn add_binding(to: &mut Vec<TokenStream2>, ident: &Ident, ty: &Type, expr: &Expr
     };
 
     to.push(quote_spanned!(span =>
-        let #ident_tmp = #expr;
-        let #ident = <#ty as #from_uri_param>::from_uri_param(#ident_tmp);
+        #[allow(non_snake_case)] let #ident_tmp = #expr;
+        #[allow(non_snake_case)] let #ident = <#ty as #from_uri_param>::from_uri_param(#ident_tmp);
     ));
 }
 
