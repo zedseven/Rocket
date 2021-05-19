@@ -33,7 +33,7 @@
 //!
 //! ```toml
 //! [dependencies.rocket_contrib]
-//! version = "0.4.7"
+//! version = "0.4.8"
 //! default-features = false
 //! features = ["json"]
 //! ```
