@@ -13,8 +13,8 @@ mod schema {
 use self::schema::tasks;
 use self::schema::tasks::dsl::{tasks as all_tasks, completed as task_completed};
 
-#[table_name="tasks"]
 #[derive(Serialize, Queryable, Insertable, Debug, Clone)]
+#[table_name="tasks"]
 pub struct Task {
     pub id: Option<i32>,
     pub description: String,

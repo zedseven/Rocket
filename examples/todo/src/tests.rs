@@ -2,7 +2,7 @@ extern crate parking_lot;
 extern crate rand;
 
 use super::task::Task;
-use self::parking_lot::Mutex;
+use self::parking_lot::{Mutex, const_mutex};
 use self::rand::{Rng, thread_rng, distributions::Alphanumeric};
 
 use rocket::local::Client;
@@ -11,7 +11,7 @@ use rocket::http::{Status, ContentType};
 // We use a lock to synchronize between tests so DB operations don't collide.
 // For now. In the future, we'll have a nice way to run each test in a DB
 // transaction so we can regain concurrency.
-static DB_LOCK: Mutex<()> = Mutex::new(());
+static DB_LOCK: Mutex<()> = const_mutex(());
 
 macro_rules! run_test {
     (|$client:ident, $conn:ident| $block:expr) => ({
