@@ -177,10 +177,12 @@ impl<'a> Origin<'a> {
         ::parse::uri::route_origin_from_str(string)
     }
 
-    /// Parses the string `string` into an `Origin`. Parsing will never
-    /// allocate. This method should be used instead of
-    /// [`Origin::parse()`](uri::Origin::parse()) when the source URI is already
-    /// a `String`. Returns an `Error` if `string` is not a valid origin URI.
+    /// Parses the string `string` into an `Origin`. Parsing will never allocate
+    /// on success. May allocate on error.
+    ///
+    /// This method should be used instead of [`Origin::parse()`](Self::parse())
+    /// when the source URI is already a `String`. Returns an `Error` if
+    /// `string` is not a valid origin URI.
     ///
     /// # Example
     ///
@@ -194,36 +196,15 @@ impl<'a> Origin<'a> {
     /// assert_eq!(uri.query(), None);
     /// ```
     pub fn parse_owned(string: String) -> Result<Origin<'static>, Error<'static>> {
-        // We create a copy of a pointer to `string` to escape the borrow
-        // checker. This is so that we can "move out of the borrow" later.
-        //
-        // For this to be correct and safe, we need to ensure that:
-        //
-        //  1. No `&mut` references to `string` are created after this line.
-        //  2. `string` isn't dropped by `copy_of_str` is live.
-        //
-        // These two facts can be easily verified. An `&mut` can be created
-        // because `string` isn't `mut`. Then, `string` is clearly not dropped
-        // since it's passed in to `source`.
-        let copy_of_str = unsafe { &*(string.as_str() as *const str) };
-        let origin = Origin::parse(copy_of_str)?;
+        let origin = Origin::parse(&string).map_err(|e| e.into_owned())?;
+        debug_assert!(origin.source.is_some(), "Origin source parsed w/o source");
 
-        let uri = match origin {
-            Origin { source: Some(_), path, query, segment_count } => Origin {
-                segment_count,
-                path: path.into_owned(),
-                query: query.into_owned(),
-                // At this point, it's impossible for anything to be borrowing
-                // `string` except for `source`, even though Rust doesn't know
-                // it. Because we're replacing `source` here, there can't
-                // possibly be a borrow remaining, it's safe to "move out of the
-                // borrow".
-                source: Some(Cow::Owned(string)),
-            },
-            _ => unreachable!("parser always parses with a source")
-        };
-
-        Ok(uri)
+        Ok(Origin {
+            path: origin.path.into_owned(),
+            query: origin.query.into_owned(),
+            segment_count: origin.segment_count,
+            source: Some(Cow::Owned(string))
+        })
     }
 
     /// Returns `true` if `self` is normalized. Otherwise, returns `false`.
