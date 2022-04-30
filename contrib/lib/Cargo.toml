@@ -57,7 +57,7 @@ notify = { version = "4.0.6" }
 uuid = { version = "0.7", optional = true }
 
 # Database dependencies
-diesel = { version = "1.0", default-features = false, optional = true }
+diesel = { version = "2.0.0-rc.0", default-features = false, optional = true }
 postgres = { version = "0.15", optional = true }
 r2d2 = { version = "0.8", optional = true }
 r2d2_postgres = { version = "0.14", optional = true }
